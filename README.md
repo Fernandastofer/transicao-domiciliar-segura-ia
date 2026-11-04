@@ -41,22 +41,24 @@ Esta ferramenta soluciona o *"ponto cego perceptivo"* dos cuidadores domiciliare
      - **Restrito ao Leito / Acamado** (Comprimento corporal no leito, largura de quadril/ombros e altura da cama ajustada à cintura do cuidador)
    - Inclui **botões de preenchimento rápido em 1 clique por porte físico** (dispensando fita métrica quando indisponível) e **cálculo biomecânico em tempo real**.
 
-### 📷 Etapa 2: Guia de Captura Fotográfica e Inspeção Visual
-- Diagramas arquitetônicos integrados orientando o posicionamento e enquadramento para:
-  1. **Banheiro & Boxe (Foto Obrigatória)** — Soleira, vaso sanitário, paredes laterais e área do chuveiro.
-  2. **Quarto & Rota Noturna (Recomendada)** — Cama, caminho até a porta, fios/mangueiras e tapetes.
-  3. **Acesso da Casa / Cozinha / Corredor (Opcional)**.
-- Validação automática da orientação da imagem (horizontal vs. vertical) e diretrizes de iluminação e privacidade.
+### 📷 Etapa 2: Guia de Captura e Upload por Ambientes Separados (4 Blocos)
+Para evitar fotos acumuladas ou fora de contexto, a interface conta com blocos independentes de upload e orientações visuais dedicadas:
+1. **Banheiro & Boxe (Obrigatória):** Vaso sanitário, paredes ao lado, entrada do boxe e piso.
+2. **Quarto & Rota Noturna:** Altura da cama, rota até a porta e tapetes próximos.
+3. **Entrada & Acesso à Casa:** Porta de entrada, soleiras, desníveis e degraus externos.
+4. **Cozinha & Corredor de Passagem:** Piso perto da pia, passadeiras e largura de circulação.
+- Diagramas arquitetônicos integrados, checagem automática de enquadramento (horizontal vs. vertical) e diretrizes de iluminação e privacidade.
 
-### 🧠 Etapa 3: Motor de IA Multimodal & Plano de Alta Domiciliar Segura
+### 🧠 Etapa 3: Motor de IA Multimodal & Guia Prático para o Cuidador
+- **Linguagem Direta e Acolhedora para a Família:** Todas as saídas são formuladas em 2ª pessoa ("você deve", "faça hoje", "observe"), sem jargões herméticos, facilitando a adesão imediata de quem cuida no domicílio.
 - **Arquitetura Híbrida:**
-  - **Modo API Google Gemini (`gemini-2.5-flash` / `gemini-2.0-flash`):** Envia o meta-prompt especializado em Geriatria, Reabilitação e Ergonomia junto às fotos do domicílio para análise multimodal em tempo real.
+  - **Modo API Google Gemini (`gemini-2.5-flash` / `gemini-2.0-flash`):** Envia o prompt especializado em Geriatria, Reabilitação e Ergonomia junto às fotos do domicílio para análise multimodal em tempo real.
   - **Modo Motor Clínico-Arquitetônico Local (NBR 9050 / HOME FAST / HSSAT):** Opera instantaneamente offline sem necessidade de chave de API, garantindo disponibilidade total em demonstrações acadêmicas.
 - **Saída Estruturada e Imprimível (PDF):**
-  1. **Resumo Clínico e Antropométrico do Risco**
-  2. **Ações Imediatas (Custo R$ 0 / Primeiras 24 Horas)** com checklist interativo para a família
-  3. **Adaptações Físicas e Tecnologias Assistivas Prioritárias** (calibradas em centímetros pela antropometria do paciente e pela norma **ABNT NBR 9050**)
-  4. **Recomendações Ergonômicas para a Rotina do Cuidador**
+  1. **Resumo dos Riscos para a Família e Cuidador**
+  2. **O Que Você Deve Fazer Hoje (Custo R$ 0 / Primeiras 24 Horas)** com checklist interativo
+  3. **Adaptações e Equipamentos para Providenciar em Casa** (com medidas exatas calibradas pela antropometria e pela norma **ABNT NBR 9050**)
+  4. **Dicas de Ouro para a Rotina de Quem Cuida** (técnicas de transferência segura e proteção da coluna do cuidador)
 
 ---
 
@@ -66,16 +68,16 @@ Para facilitar a avaliação pelo Comitê de Especialistas (Geriatria, Fisiotera
 
 | Caso Clínico | Perfil do Paciente | Risco | Principais Barreiras e Foco Clínico |
 | :--- | :--- | :---: | :--- |
-| **Caso 1** | **Jovem em Pós-Op Abdominal (28 anos)**<br>Pós-apendicectomia laparoscópica, dor à flexão do tronco. | 🟢 Baixo | Alcance ergonômico (81–120 cm), prevenção de esforço abdominal ao sentar/levantar do vaso e técnica de saída da cama em bloco. |
-| **Caso 2** | **Idoso em Pós-Op de Fratura de Quadril (79 anos)**<br>Osteossíntese de fêmur há 5 dias, usa andador, baixa visão e queda recente. | 🟠 Alto | Vaso e cama baixos (flexão >90°), trilho alto de boxe, tapetes soltos na rota do andador (66 cm), degraus sem corrimão. |
-| **Caso 3** | **Idoso com Fragilidade e Declínio Cognitivo / TCL (84 anos)**<br>Marcha assistida, confusão noturna, hipotensão ortostática e uso de O₂ contínuo. | 🔴 Crítico | Mangueira de O₂ solta no piso, tapetes escuros em ambiente na penumbra, risco com fogão/gás, ausência de barras contrastantes e luz guia. |
+| **Caso 1** | **Jovem em Pós-Op Abdominal (28 anos)**<br>Pós-apendicectomia laparoscópica, dor à flexão do tronco. | 🟢 Baixo | Itens na altura da cintura (81–120 cm), prevenção de esforço abdominal ao sentar/levantar do vaso e técnica de saída da cama em bloco. |
+| **Caso 2** | **Idoso em Pós-Op de Fratura de Quadril (79 anos)**<br>Osteossíntese de fêmur há 5 dias, usa andador, baixa visão e queda recente. | 🟠 Alto | Vaso e cama baixos (flexão >90°), trilho alto de boxe, retirada imediata de tapetes na rota do andador (66 cm), calços de cama e corrimão. |
+| **Caso 3** | **Idoso com Fragilidade e Declínio Cognitivo / TCL (84 anos)**<br>Marcha assistida, confusão noturna, hipotensão ortostática e uso de O₂ contínuo. | 🔴 Crítico | Suspensão da mangueira de O₂ pelas paredes, remoção de tapetes escuros na penumbra, trava do gás, barras contrastantes e luz guia noturna. |
 
 ---
 
 ## 🔒 4. Privacidade (LGPD) e Segurança Clínica
 
 - **Privacy-by-Design (LGPD):** A ferramenta opera de maneira estritamente anônima, sem coleta de CPF, nome completo, endereço civil ou fotos contendo rostos/pessoas.
-- **Salvaguarda Clínica Mandatória:** Todas as análises exibem o aviso de segurança informando que o relatório constitui ferramenta de suporte à transição de cuidados e prevenção de riscos ambientais, não substituindo a avaliação presencial de médico, fisioterapeuta ou terapeuta ocupacional.
+- **Aviso Importante para a Família:** Todas as análises exibem a salvaguarda informando que o relatório é um guia preventivo de apoio à decisão familiar e não substitui a avaliação clínica presencial da equipe de saúde.
 
 ---
 
