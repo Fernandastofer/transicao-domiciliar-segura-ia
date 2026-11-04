@@ -572,34 +572,34 @@ const POC_CASES = {
       }
     ],
     curatedReport: {
-      resumoRisco: 'Paciente jovem (28 anos, altura poplítea A = 46 cm) com independência preservada de marcha e cognição, apresentando vulnerabilidade transitória restrita à flexão do tronco devido à dor pós-operatória abdominal (apendicectomia laparoscópica). Como a altura poplítea do paciente é de 46 cm e o vaso sanitário padrão mede cerca de 39–40 cm (caso1_banheiro.png), ocorre flexão abdominal adicional ao sentar e levantar.',
+      resumoRisco: 'Olá, família e cuidador! O seu familiar (28 anos) está se recuperando muito bem e anda sozinho, mas o corte cirúrgico no abdômen ainda causa dor ao dobrar o corpo ou fazer esforço de barriga. Como o vaso sanitário da foto é de altura comum e não tem barras de apoio, ele terá que fazer força no abdômen para levantar, o que pode aumentar a dor e o desconforto nos primeiros dias.',
       acoesImediatas: [
         {
-          titulo: 'Organizar itens de higiene e roupas na faixa de alcance ergonômico (Medida B: 81 cm a 120 cm)',
-          detalhe: 'No banheiro e quarto (caso1_banheiro.png e caso1_caminho_cama_banheiro.png), posicione papel higiênico, toalha, sabonete e roupas acima da linha do punho/quadril (81 cm) para evitar que o paciente precise se curvar ou agachar.'
+          titulo: 'Coloque as coisas dele(a) na altura da cintura (nem no chão, nem no alto)',
+          detalhe: 'Deixe papel higiênico, toalhas de banho, sabonete, mudas de roupa e copo de água na altura da cintura (cerca de 80 cm a 1 metro do chão). Assim, ele(a) não precisará se agachar nem esticar a barriga para alcançar o que precisa.'
         },
         {
-          titulo: 'Manter piso do boxe seco e utilizar calçado antiderrapante firme',
-          detalhe: 'Como o banheiro não possui barras de apoio (caso1_banheiro.png) e contrações bruscas de defesa causam dor abdominal aguda, garanta piso seco e uso de chinelo emborrachado antiderrapante durante o banho.'
+          titulo: 'Mantenha o chão do boxe bem sequinho e use calçado de borracha firme',
+          detalhe: 'Como o banheiro não tem barras de apoio (veja na foto), qualquer escorregão causaria um reflexo rápido do tronco que puxaria o abdômen operado. Mantenha o piso seco e faça-o tomar banho com chinelo de borracha antiderrapante bem firme nos pés.'
         },
         {
-          titulo: 'Posicionar apoio firme ao lado da cama para facilitar a saída em bloco',
-          detalhe: 'Manter móvel firme próximo à cama (caso1_caminho_cama_banheiro.png) na altura de 80 cm para auxiliar o impulso dos membros superiores ao levantar.'
+          titulo: 'Deixe um apoio firme e estável ao lado da cama',
+          detalhe: 'Coloque uma cadeira pesada ou mesinha bem firme ao lado da cama para que ele(a) possa apoiar as duas mãos com segurança ao sair da cama de manhã.'
         }
       ],
       adaptacoesPrioritarias: [
         {
-          titulo: 'Tapete antiderrapante com ventosas no interior do boxe',
-          detalhe: 'Fixar tapete de borracha com ventosas dentro da área do chuveiro (caso1_banheiro.png) para máxima estabilidade durante o banho em pé nos primeiros dias pós-alta.'
+          titulo: 'Tapete de borracha com ventosas dentro do boxe',
+          detalhe: 'Fixe um tapete emborrachado com ventosas bem presas no chão do chuveiro para garantir máxima aderência e evitar que ele(a) precise fazer força para se equilibrar durante o banho.'
         },
         {
-          titulo: 'Assento Sanitário Elevado Flexível de 5 a 7,5 cm ou Apoio Lateral Portátil (para atingir 46 cm)',
-          detalhe: 'Compatibiliza a altura da bacia sanitária com a medida poplítea do paciente (A = 46 cm), reduzindo a exigência da musculatura abdominal ao sentar e levantar.'
+          titulo: 'Assento sanitário elevado (5 a 7,5 cm) ou apoio lateral portátil',
+          detalhe: 'Colocar um elevador macio de assento ou um apoio de braços portátil sobre o vaso sanitário facilitará muito sentar e levantar sem forçar os pontos da cirurgia no abdômen.'
         }
       ],
       rotinaCuidador: [
-        'Orientar a técnica de "rolamento em bloco" (deitar de lado primeiro, descer as pernas para fora da cama e empurrar o colchão com os braços) para levantar da cama sem contrair o abdômen.',
-        'Manter iluminação suave acesa no corredor/banheiro durante a noite caso o paciente levante sob efeito de analgésicos, além de observar sinais de alerta no curativo cirúrgico.'
+        'Ensine a técnica de "levantar em bloco": primeiro ele(a) deve virar todo o corpo de lado na cama, colocar as duas pernas para fora e empurrar o colchão com os braços para sentar, sem dobrar a barriga.',
+        'Deixe uma luz suave ou abajur aceso à noite caso ele(a) precise ir ao banheiro com sono ou sob efeito de analgésicos, e fique atento se o curativo permanecer limpo e seco.'
       ]
     }
   },
@@ -664,42 +664,42 @@ const POC_CASES = {
       }
     ],
     curatedReport: {
-      resumoRisco: 'Paciente de 79 anos em altíssimo risco de nova queda precoce nas primeiras 72 horas pós-alta. A antropometria (Altura Poplítea A = 47 cm; Punho B = 80 cm; Largura com Andador C = 66 cm) evidencia incompatibilidade biomecânica crítica com o ambiente fotografado: o vaso sanitário baixo (~38 cm) e a cama baixa (~40 cm) forçam flexão de quadril >90° em membro recém-operado de fêmur, enquanto tapetes soltos e lixeira no corredor bloqueiam os 66 cm de passagem do andador.',
+      resumoRisco: 'Atenção redobrada, família e cuidador! O seu familiar (79 anos) acabou de operar o quadril e está com a perna fraca, usando andador e com a visão embaçada. O maior perigo para ele(a) nas primeiras 72 horas é sofrer uma nova queda ou dobrar a perna operada mais do que 90 graus. O vaso sanitário e a cama vistos nas fotos são baixos demais (o que força o quadril), o andador precisa de 66 cm de espaço livre para passar e há tapetes soltos e degraus sem corrimão na casa.',
       acoesImediatas: [
         {
-          titulo: 'Remover IMEDIATAMENTE todos os tapetes, passadeiras e panos de chão',
-          detalhe: 'Retirar hoje o tapete solto na rota do quarto (caso2_caminho_cama_banheiro.png), o pano dobrado no banheiro (caso2_banheiro.png) e a passadeira da cozinha (caso2_cozinha.png), onde as ponteiras do andador enroscam.'
+          titulo: 'Retire AGORA todos os tapetes, passadeiras e panos de chão da casa',
+          detalhe: 'Tire hoje mesmo o tapete do quarto, a passadeira da cozinha e o pano no chão do banheiro (vistos nas fotos). As pontas de borracha do andador enroscam muito fácil em tecidos no chão e provocam quedas graves.'
         },
         {
-          titulo: 'Garantir vão livre mínimo de 80 cm para a largura funcional do andador (Medida C = 66 cm)',
-          detalhe: 'Retirar a lixeira que estreita o corredor da cozinha (caso2_cozinha.png) e manter rota livre de pelo menos 80 cm entre a cama e o banheiro.'
+          titulo: 'Libere pelo menos 80 cm de passagem no corredor e na cozinha',
+          detalhe: 'Tire a lixeira da passagem da cozinha e afaste móveis do corredor. O andador dele(a) mede 66 cm de largura e precisa de espaço folgado para não bater nas paredes.'
         },
         {
-          titulo: 'Ajustar as manoplas do andador exatamente na altura do punho (Medida B = 80 cm)',
-          detalhe: 'Conferir se a empunhadura do andador de alumínio está a 80 cm do chão (mantendo cotovelos fletidos entre 20° e 30°).'
+          titulo: 'Ajuste a altura do andador para que fique na linha do punho dele(a) (80 cm)',
+          detalhe: 'Com o paciente em pé calçado, a empunhadura do andador deve ficar exatamente na altura do osso do punho (80 cm do chão), mantendo os cotovelos levemente dobrados.'
         },
         {
-          titulo: 'Elevar provisoriamente o assento da cama/poltrona para ≥ 51 cm (Medida A + 4 cm)',
-          detalhe: 'Utilizar colchão firme adicional ou almofada de alta densidade sobre a cama baixa (caso2_caminho_cama_banheiro.png) para que o joelho fique abaixo da linha do quadril.'
+          titulo: 'Coloque uma almofada firme e alta na cama/poltrona provisoriamente',
+          detalhe: 'A cama é baixa. Enquanto não colocar calços nos pés da cama, coloque um assento/almofada firme e alta para que, ao sentar, o joelho dele(a) nunca fique mais alto do que a bacia.'
         }
       ],
       adaptacoesPrioritarias: [
         {
-          titulo: 'Assento Sanitário Elevado de 12 a 13 cm + Barras de Apoio NBR 9050 (a 75–80 cm do piso)',
-          detalhe: 'Como a medida poplítea é A = 47 cm e o pós-op de quadril exige assento entre 50 e 52 cm, instalar elevador sanitário de 13 cm com alças e barras retas de 80 cm na parede lateral (corrigindo o vaso baixo de caso2_banheiro.png).'
+          titulo: 'Elevador de vaso sanitário (12 a 13 cm) com alças laterais + Barras de apoio',
+          detalhe: 'Instale com urgência um elevador de assento sanitário alto (para o assento chegar a 50–52 cm do chão) e barras de apoio em aço inox na parede do vaso a 75–80 cm do chão. Ele(a) não pode sentar no vaso baixo comum sem apoio.'
         },
         {
-          titulo: 'Banco de Banho Regulável (ajustado a 50 cm de altura) + Barras no Boxe',
-          detalhe: 'Instalar banco de banho antiderrapante regulado acima da altura poplítea (50 cm) dentro do boxe (caso2_banheiro.png), permitindo sentar antes de transpor o trilho alto.'
+          titulo: 'Cadeira de banho regulada em 50 cm de altura dentro do boxe',
+          detalhe: 'Com a perna operada, ele(a) não consegue ficar em pé no banho e nem passar as pernas por cima do trilho alto do boxe. Ele(a) deve sentar na cadeira de banho e tomar banho sentado com supervisão.'
         },
         {
-          titulo: 'Calços Extensores de Cama (+12 cm) + Corrimão e Fita Contrastante nos Degraus',
-          detalhe: 'Elevar os pés da cama baixa (caso2_caminho_cama_banheiro.png) para atingir 52 cm totais e instalar corrimão bilateral nos 2 degraus externos (caso2_acesso_casa.png).'
+          titulo: 'Calços extensores sob os pés da cama (+12 cm) e corrimão nos degraus de entrada',
+          detalhe: 'Eleve a cama para atingir 52 cm do chão e instale corrimão firme dos dois lados dos 2 degraus da entrada de casa, além de colar fita adesiva amarela reflexiva nos degraus por causa da visão fraca.'
         }
       ],
       rotinaCuidador: [
-        'Nas transferências cama/vaso, posicionar o andador travado à frente, orientar que o idoso estenda a perna operada à frente antes de sentar/levantar (respeitando o ângulo >90° da medida poplítea de 47 cm) e apoiar pelo tronco.',
-        'Garantir iluminação 100% acesa no trajeto quarto-banheiro e revisar diariamente se o piso cerâmico encontra-se totalmente seco.'
+        'Como ajudar a sentar e levantar do vaso e da cama: posicione o andador travado bem à frente dele(a), peça para ele(a) esticar a perna operada um pouquinho para frente antes de descer o corpo, e dê apoio segurando com firmeza pela cintura/cinto, NUNCA puxando pelos braços.',
+        'Mantenha as luzes 100% acesas em qualquer ida ao banheiro (mesmo no meio da noite) e confira diariamente se o chão do banheiro e da cozinha está completamente seco antes dele(a) pisar.'
       ]
     }
   },
@@ -767,38 +767,38 @@ const POC_CASES = {
       }
     ],
     curatedReport: {
-      resumoRisco: 'Paciente de 84 anos com vulnerabilidade crítica multidimensional (fragilidade, osteoartrite grave de joelhos, hipotensão ortostática, TCL e múltiplas quedas). As medidas antropométricas (Altura Poplítea A = 41 cm; Punho B = 73 cm; Largura em marcha assistida com cuidador ao lado C = 78 cm) alertam que a passagem acompanhada exige corredor desobstruído ≥ 85 cm e que a cama/assento deve permitir apoio total da planta dos pés no chão (41–44 cm) antes de ficar em pé.',
+      resumoRisco: 'Alerta máximo, família e cuidador! O seu familiar (84 anos) tem muita fraqueza nas pernas, já sofreu quedas recentes, tem esquecimentos frequentes e usa oxigênio. Nas fotos, identificamos 4 armadilhas gravíssimas: a mangueira de oxigênio solta no meio do quarto, tapetes escuros na penumbra (que ele pode confundir com buracos no chão), falta total de barras de apoio no banheiro e risco com os botões do fogão na cozinha.',
       acoesImediatas: [
         {
-          titulo: 'Fixar e suspender imediatamente a mangueira do concentrador de oxigênio pelas paredes',
-          detalhe: 'A extensão de O₂ solta no chão do quarto (caso3_caminho_cama_banheiro.png) bloqueia a rota de 78 cm da marcha assistida (paciente + cuidador) e gera risco iminente de queda noturna.'
+          titulo: 'Prenda e suspenda a mangueira de oxigênio pelas paredes AGORA',
+          detalhe: 'A extensão plástica de O₂ atravessada no chão do quarto (veja na foto) é uma armadilha fatal de tropeço para quem anda a passos curtos e arrastados. Prenda o fio com fita adesiva ou ganchos no rodapé da parede, deixando o caminho do quarto ao banheiro 100% desobstruído.'
         },
         {
-          titulo: 'Retirar todos os tapetes (especialmente os escuros) e cobrir/deslocar espelhos noturnos',
-          detalhe: 'Remover o tapete escuro do banheiro (caso3_banheiro.png) e do quarto (caso3_caminho_cama_banheiro.png). Na baixa visão somada ao declínio cognitivo, tapetes escuros parecem "buracos" no piso.'
+          titulo: 'Retire todos os tapetes (principalmente os escuros) e cubra espelhos à noite',
+          detalhe: 'Remova os tapetes escuros do banheiro e do quarto. Para quem tem declínio cognitivo e visão fraca, manchas ou tapetes escuros parecem buracos no chão, gerando pânico e desequilíbrio. Cubra espelhos do quarto à noite se causarem desorientação.'
         },
         {
-          titulo: 'Fechar o registro geral de gás do fogão e ocultar objetos de risco',
-          detalhe: 'Devido ao esquecimento de perigos óbvios relatado na triagem (fogão e torneiras), manter o registro de gás fechado após o uso na cozinha (caso3_cozinha.png).'
+          titulo: 'Feche o registro de gás do fogão e guarde objetos perigosos',
+          detalhe: 'Como ele(a) esquece perigos do dia a dia, mantenha a chave geral do gás fechada após cozinhar e guarde facas, fósforos e produtos de limpeza fora do alcance.'
         }
       ],
       adaptacoesPrioritarias: [
         {
-          titulo: 'Cadeira de Banho / Elevador de Vaso ajustado a 44–45 cm (compatível com Altura Poplítea A = 41 cm)',
-          detalhe: 'Devido à osteoartrite de joelhos mas estatura baixa (poplítea de 41 cm), utilizar elevação moderada (5 a 7 cm) e banco de banho regulado a 43 cm, garantindo que os pés alcancem o chão com segurança sem ficar balançando.'
+          titulo: 'Coloque luzes noturnas de tomada com sensor de presença (Quarto até o Banheiro)',
+          detalhe: 'Instale luzes guias amarelas automáticas nos rodapés do corredor e do banheiro. Ele(a) nunca pode acordar e tentar levantar no escuro.'
         },
         {
-          titulo: 'Barras de Apoio Contrastantes instaladas a 73–75 cm do piso (Medida B = 73 cm)',
-          detalhe: 'Instalar barras de apoio com cor contrastante em relação à parede ao lado do vaso e no boxe na exata altura do punho do paciente (73–75 cm).'
+          titulo: 'Cadeira de banho e elevador de vaso sanitário ajustados na altura do joelho (43 a 45 cm)',
+          detalhe: 'Como ele(a) é de baixa estatura (perna mede 41 cm), não coloque um elevador alto demais, pois os pés não podem ficar balançando no ar! Instale elevação moderada (5 a 7 cm) e cadeira de banho estável, garantindo que a planta dos dois pés fique sempre firme no chão.'
         },
         {
-          titulo: 'Sistema de Iluminação Guia Noturna com Sensor de Presença + Faixas Contrastantes',
-          detalhe: 'Instalar balizadores de LED âmbar com sensor automático no rodapé da cama até o vaso sanitário (caso3_caminho_cama_banheiro.png) e fita contrastante no degrau do corredor (caso3_acesso_casa.png).'
+          titulo: 'Barras de apoio com cor contrastante ao lado do vaso sanitário e no chuveiro (a 73–75 cm do chão)',
+          detalhe: 'Instale barras de apoio em cores que contrastem com a parede (ex.: barra branca sobre azulejo escuro, ou barra de cor viva) na exata altura do punho dele(a) (73–75 cm), facilitando para ele(a) enxergar onde segurar.'
         }
       ],
       rotinaCuidador: [
-        'Protocolo anti-hipotensão ortostática alinhado à antropometria (A = 41 cm): ao sentar o paciente na borda da cama, certifique-se de que ambos os pés estejam totalmente apoiados no chão por 1 a 2 minutos antes de levantar.',
-        'Como a marcha exige apoio físico lateral (largura conjunta C = 78 cm), ao passar por portas estreitas (<80 cm), o cuidador deve posicionar-se levemente atrás/diagonal segurando pela cintura pélvica.'
+        'Regra de ouro ao acordar (para evitar desmaio e pressão baixa): antes de colocar o paciente em pé, deixe-o sentado na beira da cama por 2 minutos, com as duas plantas dos pés bem apoiadas no chão. Converse calmamente com ele(a) antes de começar a andar.',
+        'Como andar junto com segurança: vocês dois juntos medem 78 cm de largura. Ao passar por portas mais estreitas, não tente passar lado a lado: posicione-se meio passo atrás, segurando firme com as duas mãos na cintura dele(a).'
       ]
     }
   }
@@ -1318,57 +1318,54 @@ function buildSpecializedClinicalPrompt() {
     : '';
 
   return `# PAPEL E EXPERTÍSE
-Você é um médico geriatra e especialista em reabilitação física e ergonomia geriátrica domiciliar. 
-Sua tarefa é cruzar os dados clínicos/funcionais e antropométricos de um paciente com as imagens do ambiente fornecidas para gerar um **Plano de Alta Segura e Adaptação Domiciliar**.
+Você é um especialista em geriatria, reabilitação física e adaptação do lar.
+Sua missão é falar de maneira humana, acolhedora, clara e direta com a FAMÍLIA e o CUIDADOR do paciente.
+Use tom em segunda pessoa ("você deve", "faça hoje", "observe"), sem jargões acadêmicos ou termos médicos difíceis.
+Sua tarefa é cruzar os dados clínicos/funcionais e medidas corporais do paciente com as fotos dos 4 ambientes (banheiro, quarto, entrada e cozinha) para gerar um **Plano de Alta Segura e Cuidados em Casa**.
 ---
 # DADOS DE ENTRADA
-## 1. Perfil Clínico-Funcional e Antropométrico do Paciente:
-${contextLine}- Mobilidade/Locomoção: ${p1}
-- Banho e Autocuidado: ${p2}
-- Transferência/Uso do Vaso Sanitário: ${p3}
-- Cognição e Orientação: ${p4}
-- Déficits Sensoriais: ${p5}
-- Histórico de Quedas e Dispositivos: ${p6}
-- Medidas Antropométricas Fundamentais: ${anthroSummary}
-## 2. Registro Fotográfico:
+## 1. Perfil Clínico-Funcional e Medidas do Paciente:
+${contextLine}- Como ele(a) anda: ${p1}
+- Banho e cuidados pessoais: ${p2}
+- Uso do vaso sanitário / sentar e levantar: ${p3}
+- Memória, raciocínio e atenção: ${p4}
+- Como enxerga e ouve: ${p5}
+- Quedas recentes e aparelhos/sondas: ${p6}
+- Medidas corporais: ${anthroSummary}
+## 2. Fotos dos Ambientes da Casa:
 ${photoDescriptions}
 ---
-# DIRETRIZES DE RACIOCÍNIO E ANÁLISE VISUAL
-Ao examinar as fotos em conjunto com o perfil clínico e antropométrico, siga rigorosamente os seguintes passos de inspeção:
-1. **Inspeção de Piso e Nível:**
-   - Procure por tapetes soltos, panos de chão, desníveis de soleira, pisos escorregadios ou trilhos no chão.
-   
-2. **Inspeção de Apoio, Transferência e Compatibilidade Antropométrica:**
-   - Verifique a presença/ausência de barras de apoio ao lado da bacia sanitária e na área do chuveiro, indicando a altura de instalação compatível com a medida de punho/alcance do paciente.
-   - Avalie se a altura do assento sanitário e da cama é compatível com a altura poplítea/assento do paciente ou com a altura ergonômica para o cuidador (em caso de acamado).
-   
-3. **Inspeção de Passagem e Ergonomia:**
-   - Avalie se o vão da porta e o espaço de giro comportam a largura funcional medida do paciente (com andador, cadeira de rodas ou auxílio lateral).
-   - Identifique obstáculos na rota (fios elétricos, mangueiras de oxigênio, móveis de quina viva, lixeiras soltas).
-4. **Inspeção Cognitiva e Sensorial:**
-   - Se o paciente tiver déficit visual ou cognitivo, avalie a iluminação (zonas de sombra, reflexos), presença de espelhos que possam causar ilusões ou desorientação, e contraste nos degraus.
+# DIRETRIZES DE RACIOCÍNIO E ANÁLISE DAS FOTOS
+Ao analisar as fotos dos ambientes da casa (Banheiro, Quarto, Acesso/Entrada e Cozinha), procure perigos práticos:
+1. **Piso e chão:** tapetes soltos, panos de chão, trilho alto de boxe, fios no caminho, piso escorregadio, degraus sem corrimão.
+2. **Sentar, levantar e apoios:** falta de barras de apoio firmes no vaso e boxe, vaso muito baixo que exige esforço, cama muito baixa ou muito alta.
+3. **Espaço livre:** portas estreitas ou móveis/lixeiras bloqueando a passagem do andador, cadeira de rodas ou do cuidador ao lado.
+4. **Iluminação e orientação:** cantos escuros à noite, espelhos que causam reflexo/confusão, degraus da mesma cor do chão.
 ---
-# FORMATO DE SAÍDA (Gere exatamente nesta estrutura)
-### 1. Resumo Clínico do Risco
-[2 a 3 frases explicando de forma empática e leiga qual é a principal vulnerabilidade identificada para a transição desse paciente para este ambiente específico]
-### 2. Ações Imediatas (Custo R$ 0 / Primeiras 24 Horas)
-*Liste de 2 a 4 ações comportamentais ou de remanejamento que a família deve fazer hoje, antes da alta ou assim que o paciente chegar:*
-- **[O que fazer]:** [Instrução prática baseada no que foi visto na foto, ex.: retirar tapete ao lado do boxe].
-- **[O que fazer]:** [Instrução prática, ex.: liberar a passagem retirando o cesto de roupas do caminho].
-### 3. Adaptações Físicas e Tecnologias Assistivas Prioritárias
-*Liste de 2 a 3 itens essenciais de baixo a médio custo recomendados para instalação imediata (com medidas personalizadas pela antropometria):*
-- **[Item 1]:** [Local exato e especificação funcional, ex.: Barra de apoio reta de 80 cm em aço inox ao lado do vaso, a 75 cm do piso].
-- **[Item 2]:** [Especificação funcional, ex.: Banco de banho articulado ou com encosto dentro do boxe].
-### 4. Recomendações para a Rotina do Cuidador
-*2 orientações pontuais de assistência ergonômica:*
-- [Dica de assistência ou técnica de transferência segura].
-- [Dica de iluminação ou checagem noturna].
+# FORMATO DE SAÍDA (Fale diretamente com a família e o cuidador nesta estrutura)
+### 1. Resumo dos Riscos para a Família
+[2 a 3 frases acolhedoras e em linguagem simples explicando qual é o maior perigo para o seu familiar ao chegar em casa e onde a atenção de vocês deve se concentrar nas primeiras 72 horas]
+
+### 2. O Que Você Deve Fazer Hoje (Custo R$ 0 / Primeiras 24 Horas)
+*Orientações práticas de remanejamento que você e sua família devem fazer agora mesmo, antes dele(a) chegar em casa:*
+- **[Ação imediata]:** [Instrução direta falando com você cuidador/família, ex.: Retire hoje o tapete ao lado do boxe para evitar escorregões].
+- **[Ação imediata]:** [Instrução direta falando com você cuidador/família, ex.: Mude a lixeira do corredor para liberar a passagem do andador].
+
+### 3. Adaptações e Equipamentos para Providenciar
+*Equipamentos essenciais recomendados para a segurança do paciente em casa (com medidas exatas para comprar ou instalar):*
+- **[Item 1]:** [Local e medida exata, ex.: Barra de apoio reta de 80 cm em aço inox instalada ao lado do vaso, a 75 cm do chão].
+- **[Item 2]:** [Especificação clara, ex.: Cadeira ou banco de banho com pés de borracha antiderrapante regulado na altura do joelho].
+
+### 4. Dicas de Ouro para a Rotina do Cuidador
+*Orientações diretas para você cuidador cuidar com segurança e sem machucar a sua coluna:*
+- [Dica de técnica de transferência ou auxílio para levantar/sentar].
+- [Dica de checagem noturna, iluminação ou rotina do banho].
 ---
-# REGRAS E SALVAGUARDAS CLÍNICAS
-- Use linguagem acessível, acolhedora e direta, evitando jargões acadêmicos herméticos.
-- Jamais prescreva medicamentos ou altere condutas médicas formais.
-- Se a imagem estiver muito escura ou se um detalhe crítico não for visível (ex.: se não for possível ver o piso do boxe), inclua uma nota explícita solicitando conferência manual desse ponto pela família.
-- Inclua ao final a seguinte nota obrigatória: *"Este relatório é uma ferramenta de suporte à transição de cuidados e prevenção de riscos domiciliares, não substituindo a avaliação clínica presencial de um médico, terapeuta ocupacional ou fisioterapeuta."*`;
+# REGRAS E SALVAGUARDAS
+- Fale com clareza, empatia e objetividade. Não use jargões herméticos.
+- Nunca faça prescrição de medicamentos.
+- Se alguma foto estiver muito escura ou sem visão completa (ex.: não deu para ver o chão do boxe), oriente a família a checar manualmente esse ponto.
+- Inclua ao final a seguinte nota obrigatória: *"Este relatório é uma ferramenta de suporte para ajudar a sua família a preparar a casa com segurança, não substituindo a consulta e orientação presencial do médico, terapeuta ocupacional ou fisioterapeuta."*`;
 }
 
 // ============================================================================
@@ -1405,26 +1402,26 @@ function generateStructuredReportFromRules() {
 
   const acoesImediatas = [
     {
-      titulo: 'Retirar tapetes soltos, panos de chão e fios da rota cama-banheiro',
-      detalhe: 'Remova hoje todos os tapetes na saída da cama e na porta do boxe do banheiro para eliminar o risco de tropeço ou deslizamento nas primeiras 72 horas.'
+      titulo: 'Retire hoje todos os tapetes, panos de chão e fios do caminho',
+      detalhe: 'Antes dele(a) chegar em casa, retire todos os tapetes da beira da cama, do corredor e da porta do banheiro. Panos no chão ou tapetes soltos são a causa número 1 de escorregões e quedas nas primeiras 72 horas.'
     },
     {
-      titulo: `Garantir corredor de passagem livre de pelo menos ${minPassageCm} cm e alcance ergonômico`,
-      detalhe: `Afaste lixeiras, cestos de roupa e móveis baixos do caminho até o banheiro para comportar com folga a medida informada no questionário, mantendo objetos de uso diário na altura de alcance confortável.`
+      titulo: `Garanta passagem livre de pelo menos ${minPassageCm} cm e coloque itens de uso diário ao alcance das mãos`,
+      detalhe: `Afaste lixeiras, mesinhas de centro e cestos de roupa do caminho entre o quarto e o banheiro. Organize roupas, toalhas, copo e remédios na altura da cintura (para não precisar se abaixar nem subir em banquinhos).`
     }
   ];
 
   if (hasOxygen) {
     acoesImediatas.push({
-      titulo: 'Fixar e elevar a mangueira extensora de oxigênio junto ao rodapé',
-      detalhe: 'Evite que a mangueira do cilindro/concentrador cruze o caminho de passagem no chão, prevenindo quedas por enroscamento dos pés ou do andador.'
+      titulo: 'Prenda a mangueira de oxigênio rente ao rodapé ou pelas paredes',
+      detalhe: 'Nunca deixe a mangueira do concentrador de oxigênio solta pelo chão por onde ele(a) anda. Fixe-a com fita ou ganchos na parede para ninguém tropeçar, especialmente à noite.'
     });
   }
 
   if (hasCognitiveDecline) {
     acoesImediatas.push({
-      titulo: 'Travar acesso ao fogão/gás e eliminar zonas de sombra ou reflexos noturnos',
-      detalhe: 'Devido ao risco de desorientação noturna e esquecimento de perigos domésticos, mantenha o registro de gás fechado após uso e deixe a rota até o banheiro iluminada.'
+      titulo: 'Feche o registro do gás do fogão e deixe uma luz acesa à noite',
+      detalhe: 'Como há risco de confusão mental ou esquecimento, mantenha o registro do fogão fechado e guarde produtos químicos e facas. Deixe uma luz indireta acesa no corredor para que ele(a) não acorde no escuro total.'
     });
   }
 
@@ -1432,58 +1429,54 @@ function generateStructuredReportFromRules() {
 
   if (profileKey === 'acamado') {
     adaptacoesPrioritarias.push({
-      titulo: `Adequação da Altura do Leito (~73 cm) e Colchão Terapêutico (mín. ${A + 15} cm)`,
-      detalhe: `Como o paciente mede ${A} cm no leito e a cama atual possui ${C} cm de altura, ${
-        C < 68
-          ? `instalar calços extensores sob os pés da cama (+${73 - C} cm) para atingir a cintura do cuidador`
-          : 'manter a altura ergonômica atual'
-      } e utilizar cadeira higiênica/poltrona com largura interna mínima de ${B + 6} cm.`
+      titulo: `Ajuste a altura da cama para ~73 cm (na altura da sua cintura) e use colchão adequado`,
+      detalhe: `Para você cuidador não machucar sua coluna ao dar banho, trocar fralda ou posicionar no leito, a cama deve ficar na altura dos seus ossos do quadril (~73 cm). Use calços firmes nos pés da cama se estiver muito baixa, e providencie colchão pneumático (caixa de ovo/alívio de pressão).`
     });
   } else if (profileKey === 'cadeirante') {
     adaptacoesPrioritarias.push({
-      titulo: `Barras de Transferência NBR 9050 (alcance de ${C} cm) e Nivelamento de Assentos a ${B} cm`,
-      detalhe: `Instalar barras de apoio lateral e frontal junto ao vaso sanitário (respeitando o alcance funcional de ${C} cm) e nivelar a altura do vaso/cama a ${B} cm para transferência lateral plana da cadeira de rodas (largura ${A} cm).`
+      titulo: `Instale barras de apoio retas ao lado do vaso e nivele a altura da cama e vaso sanitário em ${B} cm`,
+      detalhe: `Para que a transferência da cadeira de rodas para a cama ou vaso seja feita em linha reta (sem esforço de levantar o peso do corpo), nivele os assentos na mesma altura da cadeira (${B} cm) e instale barra de apoio ao lado do vaso sanitário.`
     });
   } else {
     const targetSeat = needsToiletSupport ? A + 4 : A + 1;
     const booster = Math.max(5, targetSeat - 39);
     adaptacoesPrioritarias.push({
-      titulo: `Barras de Apoio em Aço Inox (a ${B} cm do piso) + Assento Sanitário Elevado (+${booster} cm)`,
-      detalhe: `Com base na altura poplítea do paciente (A = ${A} cm) e altura do punho (B = ${B} cm), instalar elevador de vaso sanitário para atingir ${targetSeat} cm de altura total e fixar barras de apoio e manoplas de andador a ${B} cm do piso.`
+      titulo: `Instale barras de apoio em aço inox (a ${B} cm do chão) e elevador de vaso sanitário (+${booster} cm)`,
+      detalhe: `O vaso sanitário comum é baixo e exige muita força nas pernas para levantar. Com o elevador de assento (elevando para ${targetSeat} cm) e a barra de apoio na altura do punho dele(a) (${B} cm), levantar do vaso fica leve e sem risco de tombo.`
     });
   }
 
   if (needsBathSupport) {
     const bathSeatH = profileKey === 'acamado' ? 48 : profileKey === 'cadeirante' ? B : A + 2;
     adaptacoesPrioritarias.push({
-      titulo: `Banco de Banho Antiderrapante com Encosto / Cadeira Higiênica (altura regulada em ${bathSeatH} cm)`,
-      detalhe: 'Permite realizar a higiene corporal sentado com estabilidade dentro do boxe, reduzindo a fadiga e o risco de escorregamento em piso molhado.'
+      titulo: `Coloque uma cadeira de banho com pés de borracha (regulada na altura de ${bathSeatH} cm)`,
+      detalhe: 'Nunca dê banho com o paciente em pé se ele(a) estiver fraco ou com dor. A cadeira de banho dentro do boxe dá segurança total, evita escorregões no piso ensaboado e poupa o cuidador de segurar peso molhado.'
     });
   }
 
   if (hasLowVision || hasCognitiveDecline) {
     adaptacoesPrioritarias.push({
-      titulo: 'Luz Guia Noturna com Sensor de Presença + Fita Antiderrapante Contrastante',
-      detalhe: 'Sinalizar soleiras e degraus com fita de cor contrastante e instalar iluminação automática de rodapé entre a cama e o banheiro.'
+      titulo: 'Instale luz guia noturna com sensor e cole fita adesiva contrastante nos degraus',
+      detalhe: 'Coloque uma luzinha de tomada no corredor que acende sozinha com movimento e cole fita adesiva colorida (amarela ou preta) na beirada de degraus e soleiras para ele(a) enxergar onde pisa.'
     });
   }
 
   const rotinaCuidador = [
-    'Antes de colocar o paciente em pé (especialmente pela manhã ou à noite), sente-o na beira da cama por 1 a 2 minutos com os pés totalmente apoiados no chão para evitar tontura (hipotensão postural).',
-    'Mantenha o banheiro totalmente seco antes do uso, utilize calçado fechado ou antiderrapante e verifique se todos os detalhes de piso/boxe estão bem iluminados.'
+    'Nunca levante o seu familiar da cama com pressa: ao acordar, sente-o na beira da cama por 1 a 2 minutos com os dois pés bem apoiados no chão. Isso evita tontura repentina e pressão baixa ao ficar de pé.',
+    'Seque o piso do banheiro antes e logo após o banho, calce sempre nele(a) sapatos com sola de borracha antiderrapante (nada de meias ou chinelos soltos) e segure sempre pelo quadril/cintura, nunca puxando pelos braços ou axilas.'
   ];
 
   if (hasTubesOrWounds) {
     rotinaCuidador.push(
-      'Antes de iniciar qualquer transferência da cama para poltrona ou banheiro, confira a folga e fixação de sondas, drenos ou curativos para evitar tração acidental.'
+      'Antes de movimentar o paciente da cama para a cadeira, verifique se a sonda, o dreno ou o curativo não estão repuxando ou presos na grade da cama.'
     );
   }
 
-  const resumoRisco = `Com base na triagem funcional e antropométrica (${getAnthropometrySummaryString()}) integrada à inspeção ambiental, o paciente apresenta ${
+  const resumoRisco = `Olá, família e cuidador! Ao cruzarmos a situação de saúde do seu familiar com as fotos da casa, identificamos que ${
     hasPriorFalls || hasWheelchairOrBed || hasCognitiveDecline
-      ? 'alta vulnerabilidade para quedas precoces nas primeiras 72 horas pós-alta'
-      : 'vulnerabilidade funcional que exige adequação preventiva imediata do ambiente'
-  }. As recomendações abaixo foram calibradas pelas medidas corporais do paciente para garantir transferências biomecanicamente seguras no banheiro e no quarto.`;
+      ? 'ele(a) está em uma fase de alta fragilidade e risco elevado de queda nas primeiras 72 horas após a alta'
+      : 'ele(a) precisa de adaptações simples e imediatas no espaço para que a recuperação ocorra com conforto e segurança'
+  }. Os locais mais perigosos hoje são o banheiro (para sentar no vaso e tomar banho) e o caminho entre o quarto e o banheiro. Sigam as orientações práticas abaixo para proteger seu familiar e facilitar o cuidado no dia a dia.`;
 
   return {
     resumoRisco,
@@ -1605,16 +1598,16 @@ async function generateAndRenderReport() {
     ${lowPhotoNote}
 
     <div class="report-section risk-summary">
-      <h3>1. Resumo Clínico e Antropométrico do Risco</h3>
+      <h3>1. Resumo dos Riscos para a Família e Cuidador</h3>
       <p style="font-size: 0.95rem; color: var(--text-main); line-height: 1.65;">
         ${report.resumoRisco}
       </p>
     </div>
 
     <div class="report-section zero-cost">
-      <h3>2. Ações Imediatas (Custo R$ 0 / Primeiras 24 Horas)</h3>
+      <h3>2. O Que Você Deve Fazer Hoje (Custo R$ 0 / Primeiras 24 Horas)</h3>
       <p style="font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
-        Marque na caixa ao lado cada ação concluída pela família antes da chegada do paciente:
+        Marque na caixinha ao lado conforme você e sua família forem concluindo cada ação antes da chegada do seu familiar:
       </p>
       <ul class="report-list">
         ${report.acoesImediatas
@@ -1631,7 +1624,7 @@ async function generateAndRenderReport() {
     </div>
 
     <div class="report-section assistive-tech">
-      <h3>3. Adaptações Físicas e Tecnologias Assistivas Prioritárias (Calibradas por Antropometria &amp; NBR 9050)</h3>
+      <h3>3. Adaptações e Equipamentos para Providenciar em Casa (com Medidas Exatas)</h3>
       <ul class="report-list">
         ${report.adaptacoesPrioritarias
           .map(
@@ -1647,7 +1640,7 @@ async function generateAndRenderReport() {
     </div>
 
     <div class="report-section caregiver-routine">
-      <h3>4. Recomendações para a Rotina do Cuidador</h3>
+      <h3>4. Dicas de Ouro para a Rotina de Quem Cuida (Protegendo sua Coluna)</h3>
       <ul class="report-list">
         ${report.rotinaCuidador
           .map(
@@ -1780,8 +1773,9 @@ function initEventListeners() {
     document.getElementById('resetFormBtn').click();
   });
 
-  ['fileBanheiro', 'fileQuarto', 'fileOutros'].forEach((id) => {
+  ['fileBanheiro', 'fileQuarto', 'fileAcesso', 'fileCozinha'].forEach((id) => {
     const input = document.getElementById(id);
+    if (!input) return;
     input.addEventListener('change', (e) => {
       handleFileUpload(e.target.files, input.dataset.room);
       input.value = '';
