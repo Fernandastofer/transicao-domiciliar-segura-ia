@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocolo de Transição Domiciliar Segura • Medicina Híbrida (PoC)</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Top LGPD & Clinical Safety Strip -->
+  <div class="lgpd-strip">
+    <div class="lgpd-strip-left">
+      <span class="lgpd-badge">Privacy-by-Design • LGPD</span>
+      <span>Coleta estritamente anônima (sem CPF, nome completo ou endereço civil).</span>
+    </div>
+    <div>
+      <span>Base Clínica: <strong>ABNT NBR 9050 • HOME FAST • HSSAT</strong></span>
+    </div>
+  </div>
+
+  <!-- Main Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="brand-group">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            <path d="M12 7v4"></path>
+            <path d="M10 9h4"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">PROTOCOLO DE TRANSIÇÃO DOMICILIAR SEGURA</h1>
+          <div class="brand-subtitle">Projeto: Medicina Híbrida (PoC) • Aplicação: Cuidadores, Familiares e Equipe Multiprofissional</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <div class="timer-pill" title="Meta de completude da PoC: fluxo concluído em até 5 minutos">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span>Tempo: <strong id="elapsedTimer">00:00</strong> <small>(Meta &lt; 3 min)</small></span>
+        </div>
+
+        <button type="button" class="btn-api-config" id="openApiModalBtn">
+          <span class="api-status-dot" id="apiStatusDot"></span>
+          <span id="apiStatusLabel">Motor IA: Híbrido (Simulação + Gemini)</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+
+    <!-- Quick PoC Clinical Cases Bar -->
+    <section class="poc-cases-bar" aria-label="Casos Clínicos para Demonstração da PoC">
+      <div class="poc-cases-header">
+        <div class="poc-cases-title">
+          <span class="poc-badge">PoC Acadêmica</span>
+          <span>Casos Clínicos de Validação (Carregamento com 1 clique: Questionário + Imagens de Teste)</span>
+        </div>
+        <button type="button" class="btn-api-config" id="resetFormBtn" style="padding: 0.3rem 0.7rem; font-size: 0.76rem;">
+          Limpar / Novo Paciente
+        </button>
+      </div>
+
+      <div class="poc-cases-grid">
+        <button type="button" class="case-card-btn" data-case="caso1" id="btnCase1">
+          <div class="case-card-top">
+            <span class="case-name">📋 Caso 1: Jovem em Pós-Op Abdominal</span>
+            <span class="case-tag low">Risco Baixo</span>
+          </div>
+          <p class="case-desc">28 anos, pós-apendicectomia laparoscópica. Marcha independente, desconforto ao sentar/levantar, 4 fotos de teste.</p>
+        </button>
+
+        <button type="button" class="case-card-btn" data-case="caso2" id="btnCase2">
+          <div class="case-card-top">
+            <span class="case-name">📋 Caso 2: Idoso Pós-Op Fratura de Quadril</span>
+            <span class="case-tag high">Risco Alto</span>
+          </div>
+          <p class="case-desc">79 anos, osteossíntese de fêmur há 5 dias. Usa andador, baixa visão, queda recente, tapetes e degraus nas 4 fotos.</p>
+        </button>
+
+        <button type="button" class="case-card-btn" data-case="caso3" id="btnCase3">
+          <div class="case-card-top">
+            <span class="case-name">📋 Caso 3: Idoso Frágil + Declínio Cognitivo</span>
+            <span class="case-tag critical">Risco Crítico</span>
+          </div>
+          <p class="case-desc">84 anos, fragilidade, marcha assistida, confusão noturna (TCL), múltiplas quedas e uso de O₂ contínuo no chão.</p>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3-Step Navigation -->
+    <nav class="stepper" aria-label="Etapas do Protocolo">
+      <button type="button" class="step-tab active" data-step="1" id="tabStep1">
+        <div class="step-number">1</div>
+        <div>
+          <div class="step-label-small">Etapa 1 • &lt; 3 min</div>
+          <div class="step-label-main">Triagem Clínico-Funcional</div>
+        </div>
+      </button>
+
+      <button type="button" class="step-tab" data-step="2" id="tabStep2">
+        <div class="step-number">2</div>
+        <div>
+          <div class="step-label-small">Etapa 2 • 1 a 4 Fotos</div>
+          <div class="step-label-main">Guia &amp; Captura Fotográfica</div>
+        </div>
+      </button>
+
+      <button type="button" class="step-tab" data-step="3" id="tabStep3">
+        <div class="step-number">3</div>
+        <div>
+          <div class="step-label-small">Saída • Motor IA Multimodal</div>
+          <div class="step-label-main">Plano de Alta Segura</div>
+        </div>
+      </button>
+    </nav>
+
+    <!-- ==================== STEP 1: TRIAGEM FUNCIONAL ==================== -->
+    <section id="step1Panel" class="panel-card">
+      <div class="instruction-banner">
+        <div>
+          <h2>ETAPA 1: TRIAGEM FUNCIONAL &amp; VULNERABILIDADE DO PACIENTE</h2>
+          <p><strong>Instruções de Preenchimento para a Família / Cuidador:</strong> Responda às questões com base na condição física e cognitiva <strong>atual</strong> do paciente no momento da alta ou transição. Essas respostas direcionarão a análise dos pontos de perigo nas fotos.</p>
+        </div>
+        <div class="vulnerability-pill" id="liveVulnerabilityBadge">
+          <span>Grau de Dependência:</span>
+          <strong id="liveVulnerabilityText">Aguardando respostas</strong>
+        </div>
+      </div>
+
+      <!-- Optional Anonymous Clinical Profile -->
+      <div class="context-box">
+        <label for="clinicalContextInput">Contexto Clínico Breve (Opcional e Anônimo — ex.: Idade e motivo da internação/alta)</label>
+        <input
+          type="text"
+          id="clinicalContextInput"
+          class="context-input"
+          placeholder="Ex.: 79 anos, pós-operatório de fratura de fêmur há 5 dias, restrição de carga parcial..."
+        />
+      </div>
+
+      <!-- 6 Questions Grid -->
+      <div class="questions-grid" id="questionsContainer">
+        <!-- Populated dynamically from protocol schema in app.js -->
+      </div>
+
+      <!-- Adaptive Anthropometric Section (Item 7) with Guided Figure -->
+      <div id="anthropometryContainer" style="margin-top: 1.25rem;"></div>
+
+      <div class="step-footer">
+        <div style="font-size: 0.84rem; color: var(--text-secondary);">
+          <span id="step1ProgressText">0 de 6 dimensões preenchidas</span>
+        </div>
+        <button type="button" class="btn btn-primary" id="toStep2Btn">
+          <span>Avançar para Etapa 2: Fotos do Ambiente</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 2: GUIA DE CAPTURA & UPLOAD ==================== -->
+    <section id="step2Panel" class="panel-card hidden">
+      <div class="instruction-banner">
+        <div>
+          <h2>ETAPA 2: GUIA DE CAPTURA FOTOGRÁFICA PARA ANÁLISE POR IA</h2>
+          <p><strong>Como Capturar as Imagens para Validação Precisa da IA:</strong> A inteligência artificial analisa largura de passagem, desníveis de soleira, ausência de apoio e riscos de escorregamento. Siga as orientações de enquadramento abaixo.</p>
+        </div>
+        <div class="vulnerability-pill">
+          <span>Módulo: <strong>Inspeção Visual Domiciliar</strong></span>
+        </div>
+      </div>
+
+      <!-- Visual Diagrams from Page 2 of PDF -->
+      <div class="guide-grid">
+        <!-- Diagram 1: Banheiro & Boxe -->
+        <div class="guide-card">
+          <div class="guide-card-header">
+            <span class="badge-mandatory">Foto Obrigatória</span>
+            <strong style="color: var(--primary-dark);">1. Banheiro &amp; Boxe</strong>
+          </div>
+          <div class="guide-diagram-wrapper">
+            <svg class="guide-diagram-svg" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de enquadramento do Banheiro e Boxe">
+              <rect x="10" y="10" width="400" height="170" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+              <!-- Framing Dashed Box -->
+              <rect x="35" y="25" width="350" height="125" rx="4" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/>
+              <text x="210" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="#0f5c6e">▲ Ângulo Amplo da Câmera</text>
+              <!-- Toilet -->
+              <rect x="125" y="62" width="46" height="58" rx="6" fill="#ffffff" stroke="#334155" stroke-width="1.8"/>
+              <ellipse cx="148" cy="100" rx="16" ry="18" fill="#e2e8f0" stroke="#475569" stroke-width="1.2"/>
+              <text x="148" y="136" text-anchor="middle" font-size="10" font-weight="600" fill="#334155">Vaso Sanitário</text>
+              <!-- Missing Bar Alert -->
+              <circle cx="96" cy="88" r="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+              <line x1="89" y1="81" x2="103" y2="95" stroke="#dc2626" stroke-width="1.8"/>
+              <text x="96" y="72" text-anchor="middle" font-size="9.5" font-weight="700" fill="#dc2626">Sem Barra</text>
+              <!-- Threshold / Soleira -->
+              <rect x="52" y="120" width="42" height="12" rx="2" fill="#fef3c7" stroke="#d97706" stroke-width="1.2"/>
+              <text x="73" y="144" text-anchor="middle" font-size="9.5" fill="#92400e" font-weight="600">Soleira</text>
+              <line x1="94" y1="96" x2="75" y2="120" stroke="#dc2626" stroke-width="1.2" stroke-dasharray="3,3"/>
+              <!-- Shower Box Area -->
+              <rect x="235" y="52" width="130" height="86" rx="4" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8"/>
+              <text x="300" y="98" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Área do Chuveiro</text>
+            </svg>
+          </div>
+          <ul class="guide-bullets">
+            <li><strong>Posicionamento:</strong> Fique de pé no vão da porta do banheiro.</li>
+            <li><strong>Enquadramento:</strong> Capture o vaso sanitário, as paredes ao lado e a entrada do boxe na mesma foto.</li>
+            <li><strong>Pontos-chave:</strong> Soleira da porta, tapetes no piso e barras existentes.</li>
+          </ul>
+        </div>
+
+        <!-- Diagram 2: Quarto & Rota Noturna -->
+        <div class="guide-card">
+          <div class="guide-card-header">
+            <span class="badge-recommended">Recomendada</span>
+            <strong style="color: var(--primary-dark);">2. Quarto &amp; Rota Noturna</strong>
+          </div>
+          <div class="guide-diagram-wrapper">
+            <svg class="guide-diagram-svg" viewBox="0 0 420 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de enquadramento do Quarto e Rota Noturna">
+              <rect x="10" y="10" width="400" height="170" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+              <rect x="30" y="30" width="360" height="130" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+              <!-- Bed -->
+              <rect x="45" y="55" width="115" height="80" rx="5" fill="#cbd5e1" stroke="#475569" stroke-width="1.8"/>
+              <rect x="52" y="63" width="26" height="64" rx="3" fill="#f8fafc" stroke="#64748b" stroke-width="1.2"/>
+              <text x="108" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="#1e293b">Cama</text>
+              <!-- Path Arrow -->
+              <line x1="168" y1="88" x2="335" y2="88" stroke="#15803d" stroke-width="3" stroke-dasharray="6,4"/>
+              <polygon points="335,82 347,88 335,94" fill="#15803d"/>
+              <text x="252" y="76" text-anchor="middle" font-size="10" font-weight="700" fill="#15803d">Caminho até a Porta</text>
+              <!-- Rug Hazard -->
+              <circle cx="235" cy="118" r="13" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+              <text x="235" y="122" text-anchor="middle" font-size="7.5" font-weight="800" fill="#dc2626">TAPETE</text>
+              <!-- Door -->
+              <rect x="352" y="48" width="22" height="92" rx="2" fill="#e2e8f0" stroke="#475569" stroke-width="1.8"/>
+              <text x="363" y="152" text-anchor="middle" font-size="9.5" font-weight="600" fill="#334155">Porta</text>
+            </svg>
+          </div>
+          <ul class="guide-bullets">
+            <li><strong>Posicionamento:</strong> Ao lado da cama (onde o paciente apoia os pés).</li>
+            <li><strong>Enquadramento:</strong> Aponte a câmera na direção do corredor/banheiro.</li>
+            <li><strong>Pontos-chave:</strong> Fios no piso, tapetes soltos, mesas instáveis e largura livre para passagem de andador/cadeira.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Do / Don't Table from Page 2 of PDF -->
+      <table class="dodont-table" aria-label="Recomendações de Fotografia">
+        <thead>
+          <tr>
+            <th class="do-col">✓ Recomendações Corretas para a Foto</th>
+            <th class="dont-col">✗ O que Evitar ao Fotografar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Celular na horizontal (deitado):</strong> Enquadra maior amplitude de piso e paredes.</td>
+            <td><strong>Foto vertical fechada (zoom):</strong> Não permite à IA avaliar rotas e distâncias.</td>
+          </tr>
+          <tr>
+            <td><strong>Luzes 100% acesas:</strong> Acenda todas as lâmpadas e abra portas/janelas para evitar sombras no chão.</td>
+            <td><strong>Ambiente na penumbra:</strong> Dificulta a detecção de desníveis sutis e fios no chão.</td>
+          </tr>
+          <tr>
+            <td><strong>Privacidade garantida:</strong> Fotografe apenas o espaço físico, sem a presença de pessoas.</td>
+            <td><strong>Pessoas na imagem:</strong> Compromete a privacidade e distorce a análise arquitetônica.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Upload Slots by Room -->
+      <h3 style="font-size: 1rem; color: var(--primary-dark); margin-bottom: 0.75rem;">
+        Enviar Fotos do Domicílio (ou utilizar as imagens pré-carregadas dos Casos Clínicos acima)
+      </h3>
+
+      <div class="upload-zones-grid">
+        <label class="upload-slot" for="fileBanheiro">
+          <input type="file" id="fileBanheiro" accept="image/*" capture="environment" class="hidden" data-room="Banheiro & Boxe" multiple />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <span class="upload-slot-title">1. Foto do Banheiro &amp; Boxe (Obrigatória)</span>
+          <span class="upload-slot-sub">Clique para fotografar ou anexar imagem</span>
+        </label>
+
+        <label class="upload-slot" for="fileQuarto">
+          <input type="file" id="fileQuarto" accept="image/*" capture="environment" class="hidden" data-room="Quarto & Rota até o Banheiro" multiple />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span class="upload-slot-title">2. Quarto &amp; Caminho Cama-Banheiro</span>
+          <span class="upload-slot-sub">Clique para fotografar ou anexar imagem</span>
+        </label>
+
+        <label class="upload-slot" for="fileOutros">
+          <input type="file" id="fileOutros" accept="image/*" capture="environment" class="hidden" data-room="Acesso da Casa / Cozinha / Corredor" multiple />
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          <span class="upload-slot-title">3. Acesso da Casa / Cozinha (Opcional)</span>
+          <span class="upload-slot-sub">Degraus de entrada, tapetes na cozinha, corredor</span>
+        </label>
+      </div>
+
+      <!-- Uploaded Photos Preview Gallery -->
+      <div id="uploadedGallery" class="uploaded-gallery"></div>
+
+      <div class="step-footer">
+        <button type="button" class="btn btn-secondary" id="backToStep1Btn">
+          ← Voltar ao Questionário
+        </button>
+
+        <button type="button" class="btn btn-accent" id="generateReportBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+          <span>Gerar Plano de Alta Domiciliar Segura (IA Multimodal)</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== STEP 3: PLANO DE ALTA DOMICILIAR SEGURA ==================== -->
+    <section id="step3Panel" class="panel-card hidden">
+      <div class="report-header-banner">
+        <div>
+          <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.9; font-weight: 700;">
+            Relatório de Alta Segura Priorizado • Medicina Híbrida
+          </div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-top: 0.2rem;" id="reportTitleHeading">
+            Plano de Alta Segura e Adaptação Domiciliar
+          </h2>
+          <div style="font-size: 0.84rem; opacity: 0.92; margin-top: 0.25rem;" id="reportSubtitleMeta">
+            Análise integrada: Perfil Clínico-Funcional + Inspeção Visual Arquitetônica (NBR 9050)
+          </div>
+        </div>
+
+        <div class="no-print" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-secondary" id="printReportBtn" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.35);">
+            🖨️ Imprimir / Salvar PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- Functional Profile Summary Chips -->
+      <div class="report-patient-summary" id="reportPatientSummary"></div>
+
+      <!-- AI Generated Report Container -->
+      <div id="reportContentContainer"></div>
+
+      <!-- Mandatory Clinical Disclaimer -->
+      <div class="clinical-disclaimer">
+        <strong>Salvaguarda Clínica Obrigatória:</strong> <em>"Este relatório é uma ferramenta de suporte à transição de cuidados e prevenção de riscos domiciliares, não substituindo a avaliação clínica presencial de um médico, terapeuta ocupacional ou fisioterapeuta."</em>
+      </div>
+
+      <!-- Committee & Family Validation Box (Success Criteria from Canvas item 8) -->
+      <div class="panel-card no-print" style="margin-top: 1.5rem; background: #f8fafc; border-color: #cbd5e1;">
+        <h3 style="font-size: 0.95rem; color: var(--primary-dark); margin-bottom: 0.5rem;">
+          📊 Avaliação de Utilidade Percebida &amp; Validação Clínica (Métricas da PoC)
+        </h3>
+        <p style="font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.85rem;">
+          Critérios de sucesso do Canvas: Concordância Clínica ≥ 85% (comitê avaliador: geriatra, fisioterapeuta ou TO) e Utilidade Percebida ≥ 75% (clareza e aplicabilidade das ações para a família).
+        </p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+          <button type="button" class="btn btn-secondary feedback-btn" data-vote="aprovado">
+            ✅ Recomendações Claras e Clinicamente Adequadas
+          </button>
+          <button type="button" class="btn btn-secondary feedback-btn" data-vote="parcial">
+            ⚠️ Adequado com Ressalvas
+          </button>
+          <span id="feedbackConfirmMsg" style="font-size: 0.84rem; font-weight: 700; color: var(--success);"></span>
+        </div>
+      </div>
+
+      <!-- Specialized Prompt Transparency Drawer -->
+      <details class="prompt-preview-details no-print">
+        <summary>🔍 Ver Prompt Clínico Multimodal Estruturado Enviado à IA (Transparência Técnica da PoC)</summary>
+        <pre class="prompt-code-box" id="compiledPromptPreview"></pre>
+      </details>
+
+      <div class="step-footer no-print">
+        <button type="button" class="btn btn-secondary" id="backToStep2Btn">
+          ← Ajustar Fotos ou Respostas
+        </button>
+        <button type="button" class="btn btn-primary" id="newAssessmentBtn">
+          Nova Avaliação Domiciliar
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Gemini API Configuration -->
+  <div class="modal-backdrop" id="apiModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="apiModalTitle">
+    <div class="modal-card">
+      <h3 id="apiModalTitle" style="font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 0.5rem;">
+        Configuração da API de IA Multimodal (Google Gemini)
+      </h3>
+      <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        A ferramenta opera em <strong>Modo Híbrido</strong>: se você informar uma chave da API do Google Gemini (Google AI Studio), a análise enviará o prompt especializado e as fotos diretamente ao modelo <code>gemini-2.5-flash</code>. Caso deixe em branco, o motor clínico-arquitetônico integrado executará a análise localmente.
+      </p>
+
+      <div style="margin-bottom: 1rem;">
+        <label for="geminiApiKeyInput" style="display: block; font-size: 0.83rem; font-weight: 700; margin-bottom: 0.35rem;">
+          Chave da API Google Gemini (Opcional — armazenada apenas no seu navegador)
+        </label>
+        <input
+          type="password"
+          id="geminiApiKeyInput"
+          class="context-input"
+          placeholder="AIzaSy..."
+        />
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label for="geminiModelSelect" style="display: block; font-size: 0.83rem; font-weight: 700; margin-bottom: 0.35rem;">
+          Modelo Multimodal
+        </label>
+        <select id="geminiModelSelect" class="context-input">
+          <option value="gemini-2.5-flash">gemini-2.5-flash (Recomendado: Visão + Raciocínio Clínico Rápido)</option>
+          <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+          <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+        </select>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.65rem;">
+        <button type="button" class="btn btn-secondary" id="closeApiModalBtn">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="saveApiConfigBtn">Salvar Configuração</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
