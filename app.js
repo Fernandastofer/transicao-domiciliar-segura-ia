@@ -11,11 +11,11 @@ const QUESTIONS_SCHEMA = [
     type: 'single',
     fullWidth: false,
     options: [
-      { value: 'Anda sozinho, com firmeza e sem precisar de apoio.', weight: 0 },
-      { value: 'Anda segurando em paredes/móveis ou usa bengala/andador.', weight: 2 },
-      { value: 'Precisa que alguém dê o braço ou auxilie fisicamente.', weight: 3 },
-      { value: 'Usa cadeira de rodas para se locomover.', weight: 3 },
-      { value: 'Permanece a maior parte do tempo na cama ou poltrona.', weight: 4 }
+      { value: 'Anda sozinho, com firmeza e sem precisar de apoio', weight: 0 },
+      { value: 'Anda segurando em paredes/móveis ou usa bengala/andador', weight: 2 },
+      { value: 'Precisa que alguém dê o braço ou auxilie fisicamente', weight: 3 },
+      { value: 'Usa cadeira de rodas para se locomover', weight: 3 },
+      { value: 'Permanece a maior parte do tempo na cama ou poltrona', weight: 4 }
     ]
   },
   {
@@ -25,10 +25,10 @@ const QUESTIONS_SCHEMA = [
     type: 'single',
     fullWidth: false,
     options: [
-      { value: 'Toma banho em pé ou sentado sem ajuda física.', weight: 0 },
-      { value: 'Toma banho sozinho, mas requer banco ou supervisão próxima.', weight: 2 },
-      { value: 'Precisa de ajuda física para lavar pernas/pés ou entrar no boxe.', weight: 3 },
-      { value: 'Depende totalmente de auxílio (banho de leito ou cadeira higiênica).', weight: 4 }
+      { value: 'Toma banho em pé ou sentado sem ajuda física', weight: 0 },
+      { value: 'Toma banho sozinho, mas requer banco ou supervisão próxima', weight: 2 },
+      { value: 'Precisa de ajuda física para lavar pernas/pés ou entrar no boxe', weight: 3 },
+      { value: 'Depende totalmente de auxílio (banho de leito ou cadeira higiênica)', weight: 4 }
     ]
   },
   {
@@ -38,10 +38,10 @@ const QUESTIONS_SCHEMA = [
     type: 'single',
     fullWidth: false,
     options: [
-      { value: 'Senta e levanta de assentos e vaso sem esforço nem apoio.', weight: 0 },
-      { value: 'Levanta sozinho, mas apoia com força nos braços ou móveis.', weight: 1 },
-      { value: 'Requer ajuda física de outra pessoa para sentar ou levantar.', weight: 3 },
-      { value: 'Usa fraldas contínuas ou sonda vesical (não usa o vaso).', weight: 3 }
+      { value: 'Senta e levanta de assentos e vaso sem esforço nem apoio', weight: 0 },
+      { value: 'Levanta sozinho, mas apoia com força nos braços ou móveis', weight: 1 },
+      { value: 'Requer ajuda física de outra pessoa para sentar ou levantar', weight: 3 },
+      { value: 'Usa fraldas contínuas ou sonda vesical (não usa o vaso)', weight: 3 }
     ]
   },
   {
@@ -51,10 +51,10 @@ const QUESTIONS_SCHEMA = [
     type: 'single',
     fullWidth: false,
     options: [
-      { value: 'Lúcido e orientado no tempo, espaço e decisões.', weight: 0 },
-      { value: 'Esquecimentos leves cotidianos, mas reconhece o ambiente.', weight: 1 },
-      { value: 'Confusão frequente: desorienta-se à noite, troca horários ou esquece perigos óbvios (fogão, torneiras).', weight: 3 },
-      { value: 'Agitação importante, alucinações ou tentativa de fugir.', weight: 4 }
+      { value: 'Lúcido e orientado no tempo, espaço e decisões', weight: 0 },
+      { value: 'Esquecimentos leves cotidianos, mas reconhece o ambiente', weight: 1 },
+      { value: 'Confusão frequente: desorienta-se à noite, troca horários ou esquece perigos óbvios (fogão, torneiras)', weight: 3 },
+      { value: 'Agitação importante, alucinações ou tentativa de fugir', weight: 4 }
     ]
   },
   {
@@ -64,10 +64,10 @@ const QUESTIONS_SCHEMA = [
     type: 'multiple',
     fullWidth: true,
     options: [
-      { value: 'Enxerga bem no ambiente com ou sem óculos.', weight: 0 },
-      { value: 'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão.', weight: 2 },
-      { value: 'Audição funcionalmente normal (ou prótese adaptada).', weight: 0 },
-      { value: 'Dificuldade severa para ouvir falas, campainhas ou interfone.', weight: 1 }
+      { value: 'Enxerga bem no ambiente com ou sem óculos', weight: 0 },
+      { value: 'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão', weight: 2 },
+      { value: 'Audição funcionalmente normal (ou prótese adaptada)', weight: 0 },
+      { value: 'Dificuldade severa para ouvir falas, campainhas ou interfone', weight: 1 }
     ]
   },
   {
@@ -77,10 +77,10 @@ const QUESTIONS_SCHEMA = [
     type: 'multiple',
     fullWidth: true,
     options: [
-      { value: 'Apresentou queda ou episódio de quase queda nos últimos 90 dias.', weight: 3 },
-      { value: 'Usa oxigênio contínuo (cilindro ou concentrador com mangueira no chão).', weight: 3 },
-      { value: 'Possui sondas de alimentação/drenagem, ostomias ou curativos complexos.', weight: 2 },
-      { value: 'Nenhum dispositivo médico invasivo no domicílio.', weight: 0 }
+      { value: 'Apresentou queda ou episódio de quase queda nos últimos 90 dias', weight: 3 },
+      { value: 'Usa oxigênio contínuo (cilindro ou concentrador com mangueira no chão)', weight: 3 },
+      { value: 'Possui sondas de alimentação/drenagem, ostomias ou curativos complexos', weight: 2 },
+      { value: 'Nenhum dispositivo médico invasivo no domicílio', weight: 0 }
     ]
   }
 ];
@@ -518,16 +518,16 @@ const POC_CASES = {
     name: 'Caso Clínico 1: Paciente Jovem em Pós-Operatório Abdominal',
     clinicalContext: '28 anos, 1,74 m, pós-op imediato de apendicectomia laparoscópica. Apresenta dor abdominal moderada apenas aos esforços de mobilização do tronco. Curativo cirúrgico limpo e seco em abdômen.',
     answers: {
-      p1_locomocao: 'Anda sozinho, com firmeza e sem precisar de apoio.',
-      p2_banho: 'Toma banho em pé ou sentado sem ajuda física.',
-      p3_vaso_transferencia: 'Levanta sozinho, mas apoia com força nos braços ou móveis.',
-      p4_cognicao: 'Lúcido e orientado no tempo, espaço e decisões.',
+      p1_locomocao: 'Anda sozinho, com firmeza e sem precisar de apoio',
+      p2_banho: 'Toma banho em pé ou sentado sem ajuda física',
+      p3_vaso_transferencia: 'Levanta sozinho, mas apoia com força nos braços ou móveis',
+      p4_cognicao: 'Lúcido e orientado no tempo, espaço e decisões',
       p5_visao_audicao: [
-        'Enxerga bem no ambiente com ou sem óculos.',
-        'Audição funcionalmente normal (ou prótese adaptada).'
+        'Enxerga bem no ambiente com ou sem óculos',
+        'Audição funcionalmente normal (ou prótese adaptada)'
       ],
       p6_quedas_dispositivos: [
-        'Nenhum dispositivo médico invasivo no domicílio.'
+        'Nenhum dispositivo médico invasivo no domicílio'
       ]
     },
     anthropometry: {
@@ -539,7 +539,7 @@ const POC_CASES = {
     photos: [
       {
         filename: 'caso1_banheiro.png',
-        room: 'Banheiro & Boxe',
+        room: 'banheiro e box',
         sceneType: 'banheiro',
         caption: 'Banheiro contemporâneo sem barras de apoio, vaso em altura padrão, boxe com soleira baixa.',
         floorColor: '#e2e8f0',
@@ -549,7 +549,7 @@ const POC_CASES = {
       },
       {
         filename: 'caso1_caminho_cama_banheiro.png',
-        room: 'Quarto & Rota até o Banheiro',
+        room: 'caminho da cama ao banheiro',
         sceneType: 'quarto',
         caption: 'Quarto amplo, piso de madeira plano, caminho desobstruído da cama à porta do banheiro.',
         floorColor: '#dfc39d',
@@ -558,14 +558,14 @@ const POC_CASES = {
       },
       {
         filename: 'caso1_acesso_casa.png',
-        room: 'Acesso da Casa',
+        room: 'acesso à casa',
         sceneType: 'acesso',
         caption: 'Hall e porta de entrada de apartamento totalmente plano, sem degraus ou desníveis.',
         floorColor: '#e2e8f0'
       },
       {
         filename: 'caso1_cozinha.png',
-        room: 'Cozinha',
+        room: 'cozinha',
         sceneType: 'cozinha',
         caption: 'Cozinha planejada organizada, sem objetos ou tapetes no chão.',
         floorColor: '#f1f5f9'
@@ -579,8 +579,8 @@ const POC_CASES = {
           detalhe: 'Deixe papel higiênico, toalhas de banho, sabonete, mudas de roupa e copo de água na altura da cintura (cerca de 80 cm a 1 metro do chão). Assim, ele(a) não precisará se agachar nem esticar a barriga para alcançar o que precisa.'
         },
         {
-          titulo: 'Mantenha o chão do boxe bem sequinho e use calçado de borracha firme',
-          detalhe: 'Como o banheiro não tem barras de apoio (veja na foto), qualquer escorregão causaria um reflexo rápido do tronco que puxaria o abdômen operado. Mantenha o piso seco e faça-o tomar banho com chinelo de borracha antiderrapante bem firme nos pés.'
+          titulo: 'Mantenha o chão do box seco e use calçado de borracha firme',
+          detalhe: 'Como o banheiro não tem barras de apoio (veja na foto), qualquer escorregão causaria um reflexo rápido do tronco que puxaria o abdômen operado. Mantenha o piso seco e utilize calçado de borracha antiderrapante bem firme nos pés durante o banho.'
         },
         {
           titulo: 'Deixe um apoio firme e estável ao lado da cama',
@@ -589,7 +589,7 @@ const POC_CASES = {
       ],
       adaptacoesPrioritarias: [
         {
-          titulo: 'Tapete de borracha com ventosas dentro do boxe',
+          titulo: 'Tapete de borracha com ventosas dentro do box',
           detalhe: 'Fixe um tapete emborrachado com ventosas bem presas no chão do chuveiro para garantir máxima aderência e evitar que ele(a) precise fazer força para se equilibrar durante o banho.'
         },
         {
@@ -609,17 +609,17 @@ const POC_CASES = {
     name: 'Caso Clínico 2: Idoso em Pós-Operatório de Fratura de Quadril',
     clinicalContext: '79 anos, 1,72 m, submetido à osteossíntese de fêmur proximal há 5 dias. Apresenta fraqueza muscular grave em membro inferior e restrição de carga parcial.',
     answers: {
-      p1_locomocao: 'Anda segurando em paredes/móveis ou usa bengala/andador.',
-      p2_banho: 'Toma banho sozinho, mas requer banco ou supervisão próxima.',
-      p3_vaso_transferencia: 'Requer ajuda física de outra pessoa para sentar ou levantar.',
-      p4_cognicao: 'Lúcido e orientado no tempo, espaço e decisões.',
+      p1_locomocao: 'Anda segurando em paredes/móveis ou usa bengala/andador',
+      p2_banho: 'Toma banho sozinho, mas requer banco ou supervisão próxima',
+      p3_vaso_transferencia: 'Requer ajuda física de outra pessoa para sentar ou levantar',
+      p4_cognicao: 'Lúcido e orientado no tempo, espaço e decisões',
       p5_visao_audicao: [
-        'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão.',
-        'Audição funcionalmente normal (ou prótese adaptada).'
+        'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão',
+        'Audição funcionalmente normal (ou prótese adaptada)'
       ],
       p6_quedas_dispositivos: [
-        'Apresentou queda ou episódio de quase queda nos últimos 90 dias.',
-        'Nenhum dispositivo médico invasivo no domicílio.'
+        'Apresentou queda ou episódio de quase queda nos últimos 90 dias',
+        'Nenhum dispositivo médico invasivo no domicílio'
       ]
     },
     anthropometry: {
@@ -631,7 +631,7 @@ const POC_CASES = {
     photos: [
       {
         filename: 'caso2_banheiro.png',
-        room: 'Banheiro & Boxe',
+        room: 'banheiro e box',
         sceneType: 'banheiro',
         caption: 'Banheiro com vaso sanitário baixo sem elevação, ausência de barras de apoio e trilho alto de boxe com pano dobrado no piso cerâmico.',
         floorColor: '#cbd5e1',
@@ -641,7 +641,7 @@ const POC_CASES = {
       },
       {
         filename: 'caso2_caminho_cama_banheiro.png',
-        room: 'Quarto & Rota até o Banheiro',
+        room: 'caminho da cama ao banheiro',
         sceneType: 'quarto',
         caption: 'Quarto com cama baixa, andador ao lado e tapete solto na rota até a porta.',
         floorColor: '#e2e8f0',
@@ -650,14 +650,14 @@ const POC_CASES = {
       },
       {
         filename: 'caso2_acesso_casa.png',
-        room: 'Acesso da Casa',
+        room: 'acesso à casa',
         sceneType: 'acesso',
         caption: 'Entrada de casa com 2 degraus externos de pedra sem corrimão ou barras de apoio.',
         floorColor: '#94a3b8'
       },
       {
         filename: 'caso2_cozinha.png',
-        room: 'Cozinha',
+        room: 'cozinha',
         sceneType: 'cozinha',
         caption: 'Cozinha com piso escorregadio, passadeira solta na pia e lixeira obstruindo o corredor de passagem.',
         floorColor: '#cbd5e1'
@@ -689,8 +689,8 @@ const POC_CASES = {
           detalhe: 'Instale com urgência um elevador de assento sanitário alto (para o assento chegar a 50–52 cm do chão) e barras de apoio em aço inox na parede do vaso a 75–80 cm do chão. Ele(a) não pode sentar no vaso baixo comum sem apoio.'
         },
         {
-          titulo: 'Cadeira de banho regulada em 50 cm de altura dentro do boxe',
-          detalhe: 'Com a perna operada, ele(a) não consegue ficar em pé no banho e nem passar as pernas por cima do trilho alto do boxe. Ele(a) deve sentar na cadeira de banho e tomar banho sentado com supervisão.'
+          titulo: 'Cadeira de banho regulada em 50 cm de altura dentro do box',
+          detalhe: 'Com a perna operada, ele(a) não consegue ficar em pé no banho e nem passar as pernas por cima do trilho alto do box. Ele(a) deve sentar na cadeira de banho e tomar banho sentado com supervisão.'
         },
         {
           titulo: 'Calços extensores sob os pés da cama (+12 cm) e corrimão nos degraus de entrada',
@@ -709,28 +709,28 @@ const POC_CASES = {
     name: 'Caso Clínico 3: Idoso com Fragilidade, Marcha Instável e Declínio Cognitivo Inicial',
     clinicalContext: '84 anos, 1,58 m, com síndrome da fragilidade, osteoartrite grave em joelhos, hipotensão ortostática e diagnóstico recente de Transtorno Cognitivo Leve (TCL). Uso intermitente de oxigênio de apoio.',
     answers: {
-      p1_locomocao: 'Precisa que alguém dê o braço ou auxilie fisicamente.',
-      p2_banho: 'Precisa de ajuda física para lavar pernas/pés ou entrar no boxe.',
-      p3_vaso_transferencia: 'Requer ajuda física de outra pessoa para sentar ou levantar.',
-      p4_cognicao: 'Confusão frequente: desorienta-se à noite, troca horários ou esquece perigos óbvios (fogão, torneiras).',
+      p1_locomocao: 'Precisa que alguém dê o braço ou auxilie fisicamente',
+      p2_banho: 'Precisa de ajuda física para lavar pernas/pés ou entrar no boxe',
+      p3_vaso_transferencia: 'Requer ajuda física de outra pessoa para sentar ou levantar',
+      p4_cognicao: 'Confusão frequente: desorienta-se à noite, troca horários ou esquece perigos óbvios (fogão, torneiras)',
       p5_visao_audicao: [
-        'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão.'
+        'Visão embaçada/baixa; dificuldade para ver degraus ou desníveis no chão'
       ],
       p6_quedas_dispositivos: [
-        'Apresentou queda ou episódio de quase queda nos últimos 90 dias.',
-        'Usa oxigênio contínuo (cilindro ou concentrador com mangueira no chão).'
+        'Apresentou queda ou episódio de quase queda nos últimos 90 dias',
+        'Usa oxigênio contínuo (cilindro ou concentrador com mangueira no chão)'
       ]
     },
     anthropometry: {
       preset: 'baixo',
       medA: 41, // Altura poplítea (joelho-chão) -> estatura baixa (precisa apoiar os pés no chão ao sentar!)
       medB: 73, // Altura punho-chão -> barras na altura de 73-75 cm
-      medC: 78  // Largura dupla (paciente + cuidador dando o braço lateralmente)
+      medC: 44  // Largura ombros do paciente
     },
     photos: [
       {
         filename: 'caso3_banheiro.png',
-        room: 'Banheiro & Boxe',
+        room: 'banheiro e box',
         sceneType: 'banheiro',
         caption: 'Banheiro com zonas de sombra, espelho amplo frente à porta, ausência de barras e tapete escuro no piso.',
         floorColor: '#94a3b8',
@@ -741,7 +741,7 @@ const POC_CASES = {
       },
       {
         filename: 'caso3_caminho_cama_banheiro.png',
-        room: 'Quarto & Rota Noturna',
+        room: 'caminho da cama ao banheiro',
         sceneType: 'quarto',
         caption: 'Quarto na penumbra com mangueira extensora de oxigênio atravessando o caminho até a porta e tapete solto.',
         floorColor: '#64748b',
@@ -752,7 +752,7 @@ const POC_CASES = {
       },
       {
         filename: 'caso3_acesso_casa.png',
-        room: 'Corredor & Acesso',
+        room: 'acesso à casa',
         sceneType: 'acesso',
         caption: 'Corredor com degrau sem contraste visual e iluminação deficiente.',
         floorColor: '#64748b',
@@ -760,22 +760,22 @@ const POC_CASES = {
       },
       {
         filename: 'caso3_cozinha.png',
-        room: 'Cozinha',
+        room: 'cozinha',
         sceneType: 'cozinha',
         caption: 'Cozinha com botões de fogão acessíveis, objetos soltos e piso sem contraste.',
         floorColor: '#94a3b8'
       }
     ],
     curatedReport: {
-      resumoRisco: 'Alerta máximo, família e cuidador! O seu familiar (84 anos) tem muita fraqueza nas pernas, já sofreu quedas recentes, tem esquecimentos frequentes e usa oxigênio. Nas fotos, identificamos 4 armadilhas gravíssimas: a mangueira de oxigênio solta no meio do quarto, tapetes escuros na penumbra (que ele pode confundir com buracos no chão), falta total de barras de apoio no banheiro e risco com os botões do fogão na cozinha.',
+      resumoRisco: 'Alerta máximo, família e cuidador! O seu familiar (84 anos) tem muita fraqueza nas pernas, já sofreu quedas recentes, tem esquecimentos frequentes e usa oxigênio. Nas fotos, identificamos 4 armadilhas gravíssimas: a mangueira de oxigênio solta no meio do quarto, tapetes no chão, falta total de barras de apoio no banheiro e risco com os botões do fogão na cozinha.',
       acoesImediatas: [
         {
           titulo: 'Prenda e suspenda a mangueira de oxigênio pelas paredes AGORA',
           detalhe: 'A extensão plástica de O₂ atravessada no chão do quarto (veja na foto) é uma armadilha fatal de tropeço para quem anda a passos curtos e arrastados. Prenda o fio com fita adesiva ou ganchos no rodapé da parede, deixando o caminho do quarto ao banheiro 100% desobstruído.'
         },
         {
-          titulo: 'Retire todos os tapetes (principalmente os escuros) e cubra espelhos à noite',
-          detalhe: 'Remova os tapetes escuros do banheiro e do quarto. Para quem tem declínio cognitivo e visão fraca, manchas ou tapetes escuros parecem buracos no chão, gerando pânico e desequilíbrio. Cubra espelhos do quarto à noite se causarem desorientação.'
+          titulo: 'Retire todos os tapetes e cubra os espelhos à noite',
+          detalhe: 'Remova todos os tapetes do banheiro, quarto e corredores. Para pessoas idosas com baixa visão ou declínio cognitivo, tapetes escuros podem ser percebidos como buracos no chão, provocando paralisia da marcha, medo ou tentativas bruscas de desvio. Cubra ou remova espelhos da linha de visão noturna para evitar sustos com o próprio reflexo.'
         },
         {
           titulo: 'Feche o registro de gás do fogão e guarde objetos perigosos',
@@ -798,7 +798,7 @@ const POC_CASES = {
       ],
       rotinaCuidador: [
         'Regra de ouro ao acordar (para evitar desmaio e pressão baixa): antes de colocar o paciente em pé, deixe-o sentado na beira da cama por 2 minutos, com as duas plantas dos pés bem apoiadas no chão. Converse calmamente com ele(a) antes de começar a andar.',
-        'Como andar junto com segurança: vocês dois juntos medem 78 cm de largura. Ao passar por portas mais estreitas, não tente passar lado a lado: posicione-se meio passo atrás, segurando firme com as duas mãos na cintura dele(a).'
+        'Como andar junto com segurança: como ele(a) precisa de apoio físico lateral para caminhar, ao passar por portas ou locais mais estreitos, posicione-se meio passo atrás segurando firme pela cintura/quadril, em vez de tentar passar lado a lado.'
       ]
     }
   }
@@ -1346,7 +1346,7 @@ Ao analisar as fotos dos ambientes da casa (Banheiro, Quarto, Acesso/Entrada e C
 ### 1. Resumo dos Riscos para a Família
 [2 a 3 frases acolhedoras e em linguagem simples explicando qual é o maior perigo para o seu familiar ao chegar em casa e onde a atenção de vocês deve se concentrar nas primeiras 72 horas]
 
-### 2. O Que Você Deve Fazer Hoje (Custo R$ 0 / Primeiras 24 Horas)
+### 2. Por onde começar (custo zero)
 *Orientações práticas de remanejamento que você e sua família devem fazer agora mesmo, antes dele(a) chegar em casa:*
 - **[Ação imediata]:** [Instrução direta falando com você cuidador/família, ex.: Retire hoje o tapete ao lado do boxe para evitar escorregões].
 - **[Ação imediata]:** [Instrução direta falando com você cuidador/família, ex.: Mude a lixeira do corredor para liberar a passagem do andador].
@@ -1403,7 +1403,7 @@ function generateStructuredReportFromRules() {
   const acoesImediatas = [
     {
       titulo: 'Retire hoje todos os tapetes, panos de chão e fios do caminho',
-      detalhe: 'Antes dele(a) chegar em casa, retire todos os tapetes da beira da cama, do corredor e da porta do banheiro. Panos no chão ou tapetes soltos são a causa número 1 de escorregões e quedas nas primeiras 72 horas.'
+      detalhe: 'Antes dele(a) chegar em casa, retire todos os tapetes da beira da cama, do corredor e da porta do banheiro. Para pessoas idosas com visão fraca ou esquecimentos, tapetes escuros podem parecer buracos no chão e causar quedas e sustos. Panos no chão ou tapetes soltos são a causa número 1 de escorregões.'
     },
     {
       titulo: `Garanta passagem livre de pelo menos ${minPassageCm} cm e coloque itens de uso diário ao alcance das mãos`,
@@ -1557,10 +1557,6 @@ async function generateAndRenderReport() {
       <div class="summary-chip-label">Antropometria (A • B • C)</div>
       <div class="summary-chip-val">A: ${appState.anthropometry.medA} cm | B: ${appState.anthropometry.medB} cm | C: ${appState.anthropometry.medC} cm</div>
     </div>
-    <div class="summary-chip">
-      <div class="summary-chip-label">Fotos Analisadas</div>
-      <div class="summary-chip-val">${appState.photos.length} imagem(ns) do domicílio</div>
-    </div>
   `;
 
   const container = document.getElementById('reportContentContainer');
@@ -1605,7 +1601,7 @@ async function generateAndRenderReport() {
     </div>
 
     <div class="report-section zero-cost">
-      <h3>2. O Que Você Deve Fazer Hoje (Custo R$ 0 / Primeiras 24 Horas)</h3>
+      <h3>2. Por onde começar (custo zero)</h3>
       <p style="font-size: 0.83rem; color: var(--text-secondary); margin-bottom: 0.75rem;">
         Marque na caixinha ao lado conforme você e sua família forem concluindo cada ação antes da chegada do seu familiar:
       </p>
@@ -1784,16 +1780,6 @@ function initEventListeners() {
 
   document.getElementById('printReportBtn').addEventListener('click', () => {
     window.print();
-  });
-
-  document.querySelectorAll('.feedback-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const msg = document.getElementById('feedbackConfirmMsg');
-      msg.textContent =
-        btn.dataset.vote === 'aprovado'
-          ? '✓ Avaliação registrada: Concordância clínica e utilidade confirmadas para o relatório da PoC!'
-          : '✓ Avaliação com ressalvas registrada para análise do comitê.';
-    });
   });
 
   const modal = document.getElementById('apiModalBackdrop');
