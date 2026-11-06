@@ -40,14 +40,16 @@ Esta aplicação cruza uma triagem clínico-funcional rápida, medidas antropom�
      - **Restrito ao Leito / Acamado:** comprimento corporal, largura de ombros/quadril e altura da cama ergonômica para a coluna do cuidador.
    - Botões de seleção rápida por estatura em 1 clique (baixo, médio, alto).
 
-### 📷 Etapa 2: Guia de Captura Visual & Envio dos 4 Ambientes
-Diagramação estética em grade (2 em cima e 2 embaixo) com orientações ilustradas para cada cômodo:
+### 📷 Etapa 2: Guia de Captura Visual & Envio Integrado nos 4 Ambientes
+Diagramação estética em grade (2 em cima e 2 embaixo) com orientações ilustradas, botão de envio e checagem de upload embutidos diretamente em cada card para economia máxima de espaço vertical:
 1. **banheiro e box (Obrigatória):** vaso sanitário, paredes laterais, entrada do box e piso.
 2. **caminho da cama ao banheiro:** altura da cama, rota até a porta e tapetes próximos.
 3. **acesso à casa:** porta de entrada, soleiras, desníveis e degraus externos.
 4. **cozinha:** piso próximo à pia, passadeiras e botões de gás do fogão.
+- **Checagem Integrada:** Ao anexar uma imagem, o status de confirmação (`✓ Foto anexada com sucesso`), a miniatura e a opção de exclusão/substituição são exibidos dentro do próprio cartão do ambiente, eliminando galerias separadas e evitando rolagens desnecessárias.
 
 ### 🧠 Etapa 3: Plano de Alta Segura e Guia para a Família
+- **Fusão Multimodal Dinâmica (Questionário + Antropometria + Fotos):** O motor cruza a condição clínica e medidas corporais com os achados visuais das fotos reais anexadas. Se uma foto contiver um tapete, desnível, mangueira de O₂ ou ausência de barras, essa barreira arquitetônica é integrada diretamente no checklist com justificativa personalizada para a condição do paciente (ex.: risco de ruptura dos pontos cirúrgicos por sobressalto em jovem pós-apendicectomia; travamento de andador em idoso com fratura de quadril; ilusão visual de buraco em paciente com declínio cognitivo).
 - **Linguagem Acolhedora:** Redigido diretamente para quem cuida, em tom empático ("você deve", "faça hoje", "observe"), sem jargões herméticos.
 - **Estrutura do Relatório:**
   1. **Resumo dos Riscos para a Família e Cuidador**

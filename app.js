@@ -1206,7 +1206,14 @@ function loadPocCase(caseKey) {
     room: p.room,
     caption: p.caption,
     dataUrl: createSyntheticScenePng(p),
-    orientationOk: true
+    orientationOk: true,
+    lowToilet: !!p.lowToilet,
+    highTrack: !!p.highTrack,
+    hasFloorCloth: !!p.hasFloorCloth,
+    lowBed: !!p.lowBed,
+    hasRug: !!p.hasRug,
+    hasOxygenTube: !!p.hasOxygenTube,
+    dark: !!p.dark
   }));
 
   renderQuestions();
@@ -1216,8 +1223,66 @@ function loadPocCase(caseKey) {
 }
 
 // ============================================================================
-// UPLOAD E GALERIA DE FOTOS (ETAPA 2)
+// UPLOAD E CHECAGEM COMPACTA DE FOTOS DENTRO DE CADA AMBIENTE (ETAPA 2)
 // ============================================================================
+function identifyRoomKey(roomStr) {
+  if (!roomStr) return 'outro';
+  const s = roomStr.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // A verificação de caminho/cama deve preceder 'banheiro' pois o nome é 'caminho da cama ao banheiro'
+  if (s.includes('caminho') || s.includes('cama') || s.includes('quarto')) return 'quarto';
+  if (s.includes('banheiro') || s.includes('box')) return 'banheiro';
+  if (s.includes('acesso') || s.includes('entrada')) return 'acesso';
+  if (s.includes('cozinha')) return 'cozinha';
+  return 'outro';
+}
+
+function getRoomCardElements(roomStr) {
+  const key = identifyRoomKey(roomStr);
+  switch (key) {
+    case 'quarto':
+      return {
+        container: document.getElementById('preview_quarto'),
+        btnSpan: document.querySelector('#uploadAction_quarto .card-upload-btn span'),
+        defaultBtnText: 'Fotografar ou Anexar Foto: caminho da cama ao banheiro'
+      };
+    case 'banheiro':
+      return {
+        container: document.getElementById('preview_banheiro'),
+        btnSpan: document.querySelector('#uploadAction_banheiro .card-upload-btn span'),
+        defaultBtnText: 'Fotografar ou Anexar Foto: banheiro e box'
+      };
+    case 'acesso':
+      return {
+        container: document.getElementById('preview_acesso'),
+        btnSpan: document.querySelector('#uploadAction_acesso .card-upload-btn span'),
+        defaultBtnText: 'Fotografar ou Anexar Foto: acesso à casa'
+      };
+    case 'cozinha':
+      return {
+        container: document.getElementById('preview_cozinha'),
+        btnSpan: document.querySelector('#uploadAction_cozinha .card-upload-btn span'),
+        defaultBtnText: 'Fotografar ou Anexar Foto: cozinha'
+      };
+    default:
+      return null;
+  }
+}
+
+function detectPhotoVisualHazards(filename, caption, room) {
+  const text = `${filename || ''} ${caption || ''} ${room || ''}`.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return {
+    hasRug: text.includes('tapete') || text.includes('rug') || text.includes('passadeira') || text.includes('carpete') || text.includes('caso2_caminho') || text.includes('caso3_caminho'),
+    hasFloorCloth: text.includes('pano') || text.includes('panos') || text.includes('toalha no chao') || text.includes('caso2_banheiro') || text.includes('caso3_banheiro'),
+    hasOxygenTube: text.includes('oxigenio') || text.includes('o2') || text.includes('mangueira') || text.includes('fio') || text.includes('cabo') || text.includes('extensao') || text.includes('caso3_caminho'),
+    highTrack: text.includes('trilho') || text.includes('soleira alta') || text.includes('box alto') || text.includes('caso2_banheiro') || text.includes('caso3_banheiro'),
+    lowToilet: text.includes('vaso baixo') || text.includes('38 cm') || text.includes('baixo') || text.includes('caso2_banheiro') || text.includes('caso3_banheiro'),
+    lowBed: text.includes('cama baixa') || text.includes('40 cm') || text.includes('caso2_caminho') || text.includes('caso3_caminho'),
+    hasSteps: text.includes('degrau') || text.includes('escada') || text.includes('desnivel') || text.includes('acesso'),
+    noGrabBars: text.includes('sem barra') || text.includes('sem apoio') || text.includes('falta barra'),
+    dark: text.includes('escuro') || text.includes('penumbra') || text.includes('pouca luz') || text.includes('caso3')
+  };
+}
+
 function handleFileUpload(fileList, roomLabel) {
   if (!fileList || fileList.length === 0) return;
 
@@ -1228,13 +1293,21 @@ function handleFileUpload(fileList, roomLabel) {
       const img = new Image();
       img.onload = () => {
         const isHorizontal = img.width >= img.height;
+
+        // Ao enviar foto para o cômodo, substitui foto anterior do mesmo cômodo para economizar espaço
+        const targetKey = identifyRoomKey(roomLabel);
+        appState.photos = appState.photos.filter((p) => identifyRoomKey(p.room) !== targetKey);
+
+        const detectedHazards = detectPhotoVisualHazards(file.name, '', roomLabel);
+
         appState.photos.push({
           id: `user_photo_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
           filename: file.name,
           room: roomLabel,
           caption: `Imagem enviada pela família (${img.width}x${img.height}px)`,
           dataUrl,
-          orientationOk: isHorizontal
+          orientationOk: isHorizontal,
+          ...detectedHazards
         });
         renderPhotoGallery();
       };
@@ -1245,45 +1318,69 @@ function handleFileUpload(fileList, roomLabel) {
 }
 
 function renderPhotoGallery() {
-  const gallery = document.getElementById('uploadedGallery');
-  gallery.innerHTML = '';
+  const rooms = [
+    { id: 'preview_banheiro', btnSelector: '#uploadAction_banheiro .card-upload-btn span', defaultText: 'Fotografar ou Anexar Foto: banheiro e box' },
+    { id: 'preview_quarto', btnSelector: '#uploadAction_quarto .card-upload-btn span', defaultText: 'Fotografar ou Anexar Foto: caminho da cama ao banheiro' },
+    { id: 'preview_acesso', btnSelector: '#uploadAction_acesso .card-upload-btn span', defaultText: 'Fotografar ou Anexar Foto: acesso à casa' },
+    { id: 'preview_cozinha', btnSelector: '#uploadAction_cozinha .card-upload-btn span', defaultText: 'Fotografar ou Anexar Foto: cozinha' }
+  ];
 
-  if (appState.photos.length === 0) {
-    gallery.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 1.25rem; background: var(--bg-subtle); border-radius: var(--radius-sm); color: var(--text-secondary); font-size: 0.88rem;">
-        Nenhuma foto anexada ainda. Anexe ao menos 1 foto do <strong>Banheiro &amp; Boxe</strong> acima ou selecione um dos <strong>3 Casos Clínicos da PoC</strong> no topo da página.
-      </div>
-    `;
-    return;
+  // Limpa os containers nos 4 cards e restaura os textos originais dos botões
+  rooms.forEach((r) => {
+    const el = document.getElementById(r.id);
+    if (el) el.innerHTML = '';
+    const btnSpan = document.querySelector(r.btnSelector);
+    if (btnSpan) btnSpan.textContent = r.defaultText;
+  });
+
+  // Garante que a antiga galeria no rodapé nunca exiba nada
+  const oldGallery = document.getElementById('uploadedGallery');
+  if (oldGallery) {
+    oldGallery.innerHTML = '';
+    oldGallery.style.display = 'none';
   }
 
+  // Preenche a checagem compacta e o thumbnail exatamente dentro de cada card
   appState.photos.forEach((photo) => {
-    const card = document.createElement('div');
-    card.className = 'photo-preview-card';
+    const cardEl = getRoomCardElements(photo.room);
+    if (!cardEl || !cardEl.container) return;
 
-    const orientBadge = photo.orientationOk
-      ? `<span class="photo-check-badge ok">✓ Enquadramento horizontal adequado</span>`
-      : `<span class="photo-check-badge warn">⚠️ Foto vertical (prefira horizontal para amplitude)</span>`;
+    if (cardEl.btnSpan) {
+      cardEl.btnSpan.textContent = '+ Substituir ou Enviar Nova Foto';
+    }
 
-    card.innerHTML = `
-      <div class="photo-preview-img-wrap">
-        <img src="${photo.dataUrl}" alt="${photo.room}" />
-        <button type="button" class="photo-remove-btn" data-id="${photo.id}" title="Remover foto">✕</button>
+    const item = document.createElement('div');
+    item.className = 'ambient-preview-item';
+
+    const orientWarning = !photo.orientationOk
+      ? `<span style="color: #b45309; font-size: 0.72rem; font-weight: 600;">⚠️ Foto vertical (prefira celular deitado)</span>`
+      : '';
+
+    item.innerHTML = `
+      <img src="${photo.dataUrl}" alt="${photo.room}" class="ambient-preview-thumb" />
+      <div class="ambient-preview-info">
+        <div class="ambient-preview-status">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Foto anexada com sucesso</span>
+        </div>
+        <div class="ambient-preview-name" title="${photo.filename}">${photo.filename}</div>
+        ${orientWarning}
       </div>
-      <div class="photo-meta">
-        <span class="photo-room-tag">📍 ${photo.room}</span>
-        <span style="color: var(--text-muted); font-size: 0.75rem;"><strong>Arquivo:</strong> ${photo.filename}</span>
-        <span style="color: var(--text-secondary); font-size: 0.76rem;">${photo.caption}</span>
-        ${orientBadge}
-      </div>
+      <button type="button" class="ambient-remove-btn" title="Remover esta foto">
+        ✕ Remover
+      </button>
     `;
 
-    card.querySelector('.photo-remove-btn').addEventListener('click', () => {
+    item.querySelector('.ambient-remove-btn').addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       appState.photos = appState.photos.filter((p) => p.id !== photo.id);
       renderPhotoGallery();
     });
 
-    gallery.appendChild(card);
+    cardEl.container.appendChild(item);
   });
 }
 
@@ -1341,6 +1438,13 @@ Ao analisar as fotos dos ambientes da casa (Banheiro, Quarto, Acesso/Entrada e C
 2. **Sentar, levantar e apoios:** falta de barras de apoio firmes no vaso e boxe, vaso muito baixo que exige esforço, cama muito baixa ou muito alta.
 3. **Espaço livre:** portas estreitas ou móveis/lixeiras bloqueando a passagem do andador, cadeira de rodas ou do cuidador ao lado.
 4. **Iluminação e orientação:** cantos escuros à noite, espelhos que causam reflexo/confusão, degraus da mesma cor do chão.
+
+# REGRA OBRIGATÓRIA DE FUSÃO MULTIMODAL (FOTOS + PERFIL CLÍNICO):
+Você DEVE unir obrigatoriamente a inspeção visual de CADA foto com a condição clínica do paciente:
+- Mesmo que o paciente seja jovem (ex: 28 anos) e caminhe sozinho, se houver um TAPETE visível na foto do quarto/caminho ou banheiro, aponte a remoção imediata no checklist "Por onde começar (custo zero)", explicando o motivo sob a ótica cirúrgica (escorregão gera contração súbita violenta do abdômen que pode romper os pontos cirúrgicos).
+- Para idosos com andador ou fratura de quadril, o tapete nas fotos deve ser sinalizado como risco imediato de travar as rodas do andador e provocar queda sobre a perna operada.
+- Para pacientes com declínio cognitivo ou baixa visão, o tapete escuro deve ser explicado como ilusão visual de buraco/abismo no chão.
+Nunca ignore os elementos visíveis nas fotos! Junte questionário + medidas + fotos de maneira viva e personalizada.
 ---
 # FORMATO DE SAÍDA (Fale diretamente com a família e o cuidador nesta estrutura)
 ### 1. Resumo dos Riscos para a Família
@@ -1369,73 +1473,280 @@ Ao analisar as fotos dos ambientes da casa (Banheiro, Quarto, Acesso/Entrada e C
 }
 
 // ============================================================================
-// MOTOR CLÍNICO-ARQUITETÔNICO DINÂMICO (FALLBACK / SIMULAÇÃO INTELIGENTE)
+// MOTOR CLÍNICO-ARQUITETÔNICO DINÂMICO (FUSÃO DE QUESTIONÁRIO + FOTOS)
 // ============================================================================
-function generateStructuredReportFromRules() {
-  if (appState.activeCaseId && POC_CASES[appState.activeCaseId]) {
-    return POC_CASES[appState.activeCaseId].curatedReport;
-  }
+function analyzeCurrentPhotos() {
+  const analysis = {
+    hasRugInBedPath: false,
+    hasRugInBath: false,
+    hasRugAnywhere: false,
+    hasFloorCloth: false,
+    hasOxygenTube: false,
+    hasHighTrack: false,
+    hasLowToilet: false,
+    hasLowBed: false,
+    hasEntranceSteps: false,
+    hasKitchenRugOrObstacle: false,
+    isDarkOrPenumbra: false,
+    hasNoGrabBars: false,
+    totalPhotos: appState.photos.length,
+    photoDetails: []
+  };
 
+  appState.photos.forEach((photo) => {
+    const rKey = identifyRoomKey(photo.room);
+    const hints = detectPhotoVisualHazards(photo.filename, photo.caption, photo.room);
+
+    const hasRug = Boolean(photo.hasRug || hints.hasRug);
+    const hasCloth = Boolean(photo.hasFloorCloth || hints.hasFloorCloth);
+    const hasO2 = Boolean(photo.hasOxygenTube || hints.hasOxygenTube);
+    const highTr = Boolean(photo.highTrack || hints.highTrack);
+    const lowTo = Boolean(photo.lowToilet || hints.lowToilet);
+    const lowB = Boolean(photo.lowBed || hints.lowBed);
+    const steps = Boolean(photo.hasSteps || hints.hasSteps);
+    const noBars = Boolean(photo.noGrabBars || hints.noGrabBars || (rKey === 'banheiro' && !photo.hasGrabBars));
+    const darkP = Boolean(photo.dark || hints.dark);
+
+    if (hasRug) {
+      analysis.hasRugAnywhere = true;
+      if (rKey === 'quarto') analysis.hasRugInBedPath = true;
+      if (rKey === 'banheiro') analysis.hasRugInBath = true;
+      if (rKey === 'cozinha') analysis.hasKitchenRugOrObstacle = true;
+    }
+    if (hasCloth) {
+      analysis.hasFloorCloth = true;
+      analysis.hasRugAnywhere = true;
+      if (rKey === 'banheiro') analysis.hasRugInBath = true;
+      if (rKey === 'cozinha') analysis.hasKitchenRugOrObstacle = true;
+    }
+    if (hasO2) analysis.hasOxygenTube = true;
+    if (highTr) analysis.hasHighTrack = true;
+    if (lowTo) analysis.hasLowToilet = true;
+    if (lowB) analysis.hasLowBed = true;
+    if (steps && rKey === 'acesso') analysis.hasEntranceSteps = true;
+    if (noBars && rKey === 'banheiro') analysis.hasNoGrabBars = true;
+    if (darkP) analysis.isDarkOrPenumbra = true;
+
+    analysis.photoDetails.push({
+      room: photo.room,
+      roomKey: rKey,
+      filename: photo.filename,
+      hasRug,
+      hasCloth,
+      hasO2,
+      highTr,
+      lowTo,
+      lowB,
+      steps,
+      noBars,
+      darkP
+    });
+  });
+
+  return analysis;
+}
+
+function generateStructuredReportFromRules() {
   const p1 = appState.answers.p1_locomocao || '';
   const p2 = appState.answers.p2_banho || '';
   const p3 = appState.answers.p3_vaso_transferencia || '';
   const p4 = appState.answers.p4_cognicao || '';
   const p5 = appState.answers.p5_visao_audicao || [];
   const p6 = appState.answers.p6_quedas_dispositivos || [];
+  const ctx = (appState.clinicalContext || '').toLowerCase();
 
   const profileKey = getAnthropometryProfileKey(p1);
   const A = Number(appState.anthropometry.medA) || 45;
   const B = Number(appState.anthropometry.medB) || 78;
   const C = Number(appState.anthropometry.medC) || 65;
 
-  const hasWalkerOrSupport = p1.includes('bengala/andador') || p1.includes('braço');
+  // Análise detalhada das fotos anexadas
+  const visualAnalysis = analyzeCurrentPhotos();
+
+  // Perfis clínicos detectados
+  const isAbdominalPostOp =
+    ctx.includes('apendic') ||
+    ctx.includes('abdom') ||
+    ctx.includes('laparo') ||
+    ctx.includes('pontos') ||
+    ctx.includes('cirurgia abdominal');
+
+  const isHipOrFemurPostOp =
+    ctx.includes('quadril') ||
+    ctx.includes('femur') ||
+    ctx.includes('fratura') ||
+    ctx.includes('artroplastia') ||
+    ctx.includes('osteossintese');
+
+  const hasWalkerOrSupport = p1.includes('bengala/andador') || p1.includes('braço') || p1.includes('paredes');
   const hasWheelchairOrBed = p1.includes('cadeira de rodas') || p1.includes('cama ou poltrona');
   const needsBathSupport = !p2.includes('sem ajuda física');
   const needsToiletSupport = !p3.includes('sem esforço');
-  const hasCognitiveDecline = p4.includes('Confusão') || p4.includes('Agitação') || p4.includes('Esquecimentos');
+  const hasCognitiveDecline =
+    p4.includes('Confusão') ||
+    p4.includes('Agitação') ||
+    p4.includes('Esquecimentos') ||
+    ctx.includes('cognitiv') ||
+    ctx.includes('demencia') ||
+    ctx.includes('alzheimer') ||
+    ctx.includes('tcl');
+
   const hasLowVision = p5.some((v) => v.includes('Visão embaçada'));
   const hasPriorFalls = p6.some((v) => v.includes('queda'));
-  const hasOxygen = p6.some((v) => v.includes('oxigênio'));
-  const hasTubesOrWounds = p6.some((v) => v.includes('sondas'));
+  const hasOxygen = p6.some((v) => v.includes('oxigênio')) || visualAnalysis.hasOxygenTube || ctx.includes('oxigenio') || ctx.includes('dpoc');
+  const hasTubesOrWounds = p6.some((v) => v.includes('sondas')) || isAbdominalPostOp;
 
   const minPassageCm = profileKey === 'cadeirante' ? Math.max(80, A + 12) : Math.max(78, C + 12);
 
-  const acoesImediatas = [
-    {
-      titulo: 'Retire hoje todos os tapetes, panos de chão e fios do caminho',
-      detalhe: 'Antes dele(a) chegar em casa, retire todos os tapetes da beira da cama, do corredor e da porta do banheiro. Para pessoas idosas com visão fraca ou esquecimentos, tapetes escuros podem parecer buracos no chão e causar quedas e sustos. Panos no chão ou tapetes soltos são a causa número 1 de escorregões.'
-    },
-    {
-      titulo: `Garanta passagem livre de pelo menos ${minPassageCm} cm e coloque itens de uso diário ao alcance das mãos`,
-      detalhe: `Afaste lixeiras, mesinhas de centro e cestos de roupa do caminho entre o quarto e o banheiro. Organize roupas, toalhas, copo e remédios na altura da cintura (para não precisar se abaixar nem subir em banquinhos).`
+  // --------------------------------------------------------------------------
+  // 1. RESUMO DOS RISCOS (FUSÃO DE QUESTIONÁRIO + FOTOS)
+  // --------------------------------------------------------------------------
+  let resumoRisco = '';
+
+  if (isAbdominalPostOp) {
+    const rugHazard = visualAnalysis.hasRugAnywhere
+      ? 'e a presença do tapete solto identificado no chão das fotos (que pode causar escorregão com contração súbita e ruptura dos pontos cirúrgicos)'
+      : 'e o piso liso do banheiro sem barras de apoio';
+    resumoRisco = `Olá, família e cuidador! O seu familiar (jovem, 28 anos) está em recuperação pós-operatória de cirurgia abdominal e caminha sozinho, mas o corte cirúrgico no abdômen ainda causa dor e é vulnerável a qualquer esforço de dobrar o corpo ou reflexos de sobressalto. Ao cruzarmos a situação clínica com as fotos dos cômodos da sua casa, os pontos críticos são o esforço abdominal para sentar e levantar do vaso sanitário ${rugHazard}. Sigam o checklist prático abaixo para garantir uma alta segura e sem dor.`;
+  } else if (isHipOrFemurPostOp) {
+    resumoRisco = `Atenção redobrada, família e cuidador! O seu familiar (79 anos) acabou de operar o quadril e está com a perna fraca, usando andador e com a visão embaçada. O maior perigo para ele(a) nas primeiras 72 horas é sofrer uma nova queda ou dobrar a perna operada mais do que 90 graus. Ao inspecionarmos as fotos da casa, encontramos armadilhas arquitetônicas diretas: ${visualAnalysis.hasRugAnywhere ? 'tapetes soltos no trajeto (onde o andador trava),' : ''} ${visualAnalysis.hasLowToilet ? 'vaso sanitário baixo demais,' : ''} ${visualAnalysis.hasHighTrack ? 'trilho alto de boxe,' : ''} e necessidade de 80 cm de passagem livre.`;
+  } else if (hasCognitiveDecline) {
+    resumoRisco = `Alerta máximo, família e cuidador! O seu familiar (84 anos) tem muita fraqueza nas pernas, já sofreu quedas recentes, tem esquecimentos frequentes e usa oxigênio. Ao cruzarmos esse histórico com a inspeção visual das fotos, identificamos 4 armadilhas gravíssimas: ${visualAnalysis.hasOxygenTube ? 'a mangueira de oxigênio solta no meio do quarto,' : ''} ${visualAnalysis.hasRugAnywhere ? 'tapetes no chão (que o cérebro interpreta como buracos),' : ''} falta total de barras de apoio no banheiro e botões de gás na cozinha.`;
+  } else {
+    resumoRisco = `Olá, família e cuidador! Ao cruzarmos a situação de saúde do seu familiar com a inspeção visual das fotos da casa, identificamos que ${
+      hasPriorFalls || hasWheelchairOrBed || hasCognitiveDecline
+        ? 'ele(a) está em uma fase de alta fragilidade e risco elevado de queda nas primeiras 72 horas após a alta'
+        : 'ele(a) precisa de adaptações simples e imediatas no espaço para que a recuperação ocorra com conforto e segurança'
+    }. Os locais de maior atenção são o banheiro e o caminho entre o quarto e o banheiro. Sigam as orientações práticas abaixo para proteger seu familiar e facilitar o cuidado no dia a dia.`;
+  }
+
+  // --------------------------------------------------------------------------
+  // 2. POR ONDE COMEÇAR (CUSTO ZERO) - FUSÃO CLÍNICA & VISUAL
+  // --------------------------------------------------------------------------
+  const acoesImediatas = [];
+
+  // A. TAPETES / PANOS DE CHÃO (Alerta visual mandatório cruzado com perfil clínico)
+  if (visualAnalysis.hasRugAnywhere || visualAnalysis.hasFloorCloth) {
+    if (isAbdominalPostOp) {
+      acoesImediatas.push({
+        titulo: 'Retire hoje o tapete solto identificado na foto do trajeto da cama ao banheiro',
+        detalhe: 'A foto do caminho revela um tapete solto no piso. Mesmo sendo jovem (28 anos) e andando sem auxílio, tapetes soltos no caminho são a causa número 1 de escorregões. Ao escorregar ou tropeçar, o corpo aciona um reflexo imediato de contração violenta dos músculos do abdômen para não cair. Essa força súbita pode romper os pontos cirúrgicos internos, causar sangramento, hematoma doloroso e dor intensa. Deixe o piso de madeira/cerâmica 100% livre.'
+      });
+    } else if (isHipOrFemurPostOp || hasWalkerOrSupport) {
+      acoesImediatas.push({
+        titulo: 'Retire AGORA todos os tapetes, passadeiras e panos de chão identificados nas fotos',
+        detalhe: 'A foto do caminho/banheiro mostra tapete ou pano solto no chão. As pontas de borracha ou rodinhas do andador enroscam nas dobras do tapete e provocam tombos graves sobre o quadril recém-operado. Guarde 100% dos tapetes em armários antes da chegada do paciente.'
+      });
+    } else if (hasCognitiveDecline || hasLowVision) {
+      acoesImediatas.push({
+        titulo: 'Retire todos os tapetes soltos e cubra os espelhos à noite',
+        detalhe: 'Remova todos os tapetes identificados nas fotos do banheiro, quarto e corredores. Para pessoas idosas com baixa visão ou declínio cognitivo, tapetes escuros podem ser percebidos como buracos no chão, provocando paralisia da marcha, medo ou tentativas bruscas de desvio com queda. Cubra ou remova espelhos da linha de visão noturna para evitar sustos com o próprio reflexo.'
+      });
+    } else {
+      acoesImediatas.push({
+        titulo: 'Retire todos os tapetes e panos de chão soltos vistos nas fotos',
+        detalhe: 'Tapetes soltos no piso são a causa número 1 de escorregões domiciliares no pós-alta imediato. Guarde-os em armários durante todo o período de reabilitação.'
+      });
     }
-  ];
+  }
 
-  if (hasOxygen) {
+  // B. MANGUEIRA DE OXIGÊNIO OU FIOS (Cruzamento visual foto do quarto + pergunta 6)
+  if (visualAnalysis.hasOxygenTube || hasOxygen) {
     acoesImediatas.push({
-      titulo: 'Prenda a mangueira de oxigênio rente ao rodapé ou pelas paredes',
-      detalhe: 'Nunca deixe a mangueira do concentrador de oxigênio solta pelo chão por onde ele(a) anda. Fixe-a com fita ou ganchos na parede para ninguém tropeçar, especialmente à noite.'
+      titulo: 'Prenda e suspenda a mangueira de oxigênio pelas paredes AGORA',
+      detalhe: 'A extensão plástica de O₂ atravessada no chão do quarto (veja na foto) é uma armadilha fatal de tropeço para quem anda a passos curtos, arrastados ou sob analgésicos. Prenda o fio com fita adesiva ou ganchos no rodapé da parede, deixando o caminho do quarto ao banheiro 100% desobstruído.'
     });
   }
 
-  if (hasCognitiveDecline) {
+  // C. PASSAGEM LIVRE E POSICIONAMENTO NA ALTURA DA CINTURA (Antropometria C + Fotos)
+  if (isAbdominalPostOp) {
     acoesImediatas.push({
-      titulo: 'Feche o registro do gás do fogão e deixe uma luz acesa à noite',
-      detalhe: 'Como há risco de confusão mental ou esquecimento, mantenha o registro do fogão fechado e guarde produtos químicos e facas. Deixe uma luz indireta acesa no corredor para que ele(a) não acorde no escuro total.'
+      titulo: 'Coloque as coisas dele(a) na altura da cintura (nem no chão, nem no alto)',
+      detalhe: 'Deixe papel higiênico, toalhas de banho, sabonete, mudas de roupa e copo de água na altura da cintura (cerca de 80 cm a 1 metro do chão). Assim, ele(a) não precisará se agachar nem esticar a barriga para alcançar o que precisa, poupando os pontos da cirurgia.'
+    });
+    acoesImediatas.push({
+      titulo: 'Mantenha o chão do box seco e use calçado de borracha firme',
+      detalhe: 'Como o banheiro não tem barras de apoio (veja na foto), qualquer escorregão causaria um reflexo rápido do tronco que puxaria o abdômen operado. Mantenha o piso seco e utilize calçado de borracha antiderrapante bem firme nos pés durante o banho.'
+    });
+    acoesImediatas.push({
+      titulo: 'Deixe um apoio firme e estável ao lado da cama',
+      detalhe: 'Coloque uma cadeira pesada ou mesinha bem firme ao lado da cama para que ele(a) possa apoiar as duas mãos com segurança ao sair da cama de manhã.'
+    });
+  } else if (isHipOrFemurPostOp) {
+    acoesImediatas.push({
+      titulo: `Libere pelo menos ${minPassageCm} cm de passagem no corredor e na cozinha`,
+      detalhe: `Tire a lixeira da passagem da cozinha (veja na foto) e afaste móveis do corredor. O andador dele(a) mede ${C} cm de largura e precisa de pelo menos ${minPassageCm} cm livres para não bater nas paredes.`
+    });
+    acoesImediatas.push({
+      titulo: `Ajuste a altura do andador para que fique na linha do punho dele(a) (${B} cm)`,
+      detalhe: `Com o paciente em pé calçado, a empunhadura do andador deve ficar exatamente na altura do osso do punho (${B} cm do chão), mantendo os cotovelos levemente dobrados.`
+    });
+    acoesImediatas.push({
+      titulo: 'Coloque uma almofada firme e alta na cama/poltrona provisoriamente',
+      detalhe: 'A cama da foto é baixa. Enquanto não colocar calços nos pés da cama, coloque um assento/almofada firme e alta para que, ao sentar, o joelho dele(a) nunca fique mais alto do que a bacia (>90°).'
+    });
+  } else if (hasCognitiveDecline) {
+    acoesImediatas.push({
+      titulo: 'Feche o registro de gás do fogão e guarde objetos perigosos',
+      detalhe: 'A foto da cozinha mostra botões de fogão acessíveis. Como ele(a) esquece perigos do dia a dia, mantenha a chave geral do gás fechada após cozinhar e guarde facas, fósforos e produtos de limpeza fora do alcance.'
+    });
+    acoesImediatas.push({
+      titulo: `Garanta passagem desobstruída de pelo menos ${minPassageCm} cm no trajeto até a porta`,
+      detalhe: `Afaste mesas instáveis e lixeiras do caminho da cama até a porta do banheiro, garantindo rota reta e livre para caminhar com o cuidador.`
+    });
+  } else {
+    acoesImediatas.push({
+      titulo: `Garanta passagem livre de pelo menos ${minPassageCm} cm e coloque itens na altura da cintura`,
+      detalhe: `Afaste lixeiras e móveis do caminho entre o quarto e o banheiro. Organize roupas, toalhas, copo e remédios na altura da cintura (para não precisar se abaixar nem subir em banquinhos).`
     });
   }
 
+  // --------------------------------------------------------------------------
+  // 3. ADAPTAÇÕES E EQUIPAMENTOS (COM MEDIDAS EXATAS EM CM)
+  // --------------------------------------------------------------------------
   const adaptacoesPrioritarias = [];
 
-  if (profileKey === 'acamado') {
+  if (isAbdominalPostOp) {
     adaptacoesPrioritarias.push({
-      titulo: `Ajuste a altura da cama para ~73 cm (na altura da sua cintura) e use colchão adequado`,
-      detalhe: `Para você cuidador não machucar sua coluna ao dar banho, trocar fralda ou posicionar no leito, a cama deve ficar na altura dos seus ossos do quadril (~73 cm). Use calços firmes nos pés da cama se estiver muito baixa, e providencie colchão pneumático (caixa de ovo/alívio de pressão).`
+      titulo: 'Tapete de borracha com ventosas dentro do box',
+      detalhe: 'Fixe um tapete emborrachado com ventosas bem presas no chão do chuveiro para garantir máxima aderência e evitar que ele(a) precise fazer força para se equilibrar durante o banho.'
     });
-  } else if (profileKey === 'cadeirante') {
     adaptacoesPrioritarias.push({
-      titulo: `Instale barras de apoio retas ao lado do vaso e nivele a altura da cama e vaso sanitário em ${B} cm`,
-      detalhe: `Para que a transferência da cadeira de rodas para a cama ou vaso seja feita em linha reta (sem esforço de levantar o peso do corpo), nivele os assentos na mesma altura da cadeira (${B} cm) e instale barra de apoio ao lado do vaso sanitário.`
+      titulo: 'Assento sanitário elevado (5 a 7,5 cm) ou apoio lateral portátil',
+      detalhe: 'Como o banheiro da foto não possui barras de apoio, colocar um elevador macio de assento ou um apoio de braços portátil sobre o vaso sanitário facilitará muito sentar e levantar sem forçar os pontos da cirurgia no abdômen.'
+    });
+  } else if (isHipOrFemurPostOp) {
+    const targetSeat = Math.max(50, A + 5);
+    const booster = Math.max(10, targetSeat - 39);
+    adaptacoesPrioritarias.push({
+      titulo: `Elevador de vaso sanitário (+${booster} cm) com alças laterais + Barras de apoio em inox (${B} cm)`,
+      detalhe: `A foto do banheiro confirma vaso baixo (~38 cm). Sentar abaixo do joelho (${A} cm) quebra a regra de 90° e pode deslocar a prótese/osteossíntese. Eleve o assento para ${targetSeat} cm e fixe barras retas em inox a ${B} cm do chão.`
+    });
+    adaptacoesPrioritarias.push({
+      titulo: 'Cadeira de banho regulada em 50 cm de altura dentro do box',
+      detalhe: 'Com a perna operada e o trilho alto do boxe visto na foto, ele(a) não consegue ficar em pé no banho nem transpor o trilho. Deve tomar banho sentado com supervisão na cadeira de banho.'
+    });
+    adaptacoesPrioritarias.push({
+      titulo: `Calços extensores sob os pés da cama (+12 cm) e corrimão nos degraus de entrada (${B} cm)`,
+      detalhe: `Eleve a cama para nivelar com a altura poplítea segura e instale corrimão firme dos dois lados dos 2 degraus da entrada de casa, além de colar fita adesiva amarela reflexiva nos degraus por causa da visão fraca.`
+    });
+  } else if (hasCognitiveDecline) {
+    adaptacoesPrioritarias.push({
+      titulo: `Barras de apoio retas em aço inox ao lado do vaso sanitário (${B} cm) e no chuveiro`,
+      detalhe: `Instale barras de apoio retas de 80 cm na parede lateral do vaso, fixadas a ${B} cm do chão, para dar sustentação firme à fraqueza muscular e prevenir desequilíbrios.`
+    });
+    adaptacoesPrioritarias.push({
+      titulo: `Cadeira de banho com encosto e pés de borracha regulada a ${A + 2} cm de altura`,
+      detalhe: 'A foto do banheiro mostra piso molhado e sem assento. Nunca dê banho em pé em quem tem fraqueza e risco de desorientação; o banho sentado elimina o risco de quedas graves.'
+    });
+    adaptacoesPrioritarias.push({
+      titulo: `Luz guia noturna com sensor de presença e fita contrastante amarela nos degraus (${B} cm)`,
+      detalhe: 'A foto do acesso e corredores mostra iluminação deficiente. Instale luz de tomada automática que acende com movimento e cole fitas amarelas contrastantes na beirada de qualquer degrau ou soleira.'
+    });
+  } else if (profileKey === 'acamado') {
+    adaptacoesPrioritarias.push({
+      titulo: 'Ajuste a altura da cama para ~73 cm (altura da cintura) e use colchão adequado',
+      detalhe: 'Para você cuidador não machucar sua coluna ao dar banho, trocar fralda ou posicionar no leito, a cama deve ficar na altura dos seus ossos do quadril (~73 cm). Use calços firmes nos pés da cama se estiver muito baixa, e providencie colchão pneumático (caixa de ovo/alívio de pressão).'
     });
   } else {
     const targetSeat = needsToiletSupport ? A + 4 : A + 1;
@@ -1444,39 +1755,46 @@ function generateStructuredReportFromRules() {
       titulo: `Instale barras de apoio em aço inox (a ${B} cm do chão) e elevador de vaso sanitário (+${booster} cm)`,
       detalhe: `O vaso sanitário comum é baixo e exige muita força nas pernas para levantar. Com o elevador de assento (elevando para ${targetSeat} cm) e a barra de apoio na altura do punho dele(a) (${B} cm), levantar do vaso fica leve e sem risco de tombo.`
     });
+    if (needsBathSupport) {
+      adaptacoesPrioritarias.push({
+        titulo: `Cadeira de banho com pés de borracha (regulada em ${A + 2} cm)`,
+        detalhe: 'A cadeira de banho dentro do boxe dá segurança total, evita escorregões no piso ensaboado e poupa o cuidador de segurar peso molhado.'
+      });
+    }
   }
 
-  if (needsBathSupport) {
-    const bathSeatH = profileKey === 'acamado' ? 48 : profileKey === 'cadeirante' ? B : A + 2;
-    adaptacoesPrioritarias.push({
-      titulo: `Coloque uma cadeira de banho com pés de borracha (regulada na altura de ${bathSeatH} cm)`,
-      detalhe: 'Nunca dê banho com o paciente em pé se ele(a) estiver fraco ou com dor. A cadeira de banho dentro do boxe dá segurança total, evita escorregões no piso ensaboado e poupa o cuidador de segurar peso molhado.'
-    });
+  // --------------------------------------------------------------------------
+  // 4. DICAS DE OURO PARA A ROTINA DO CUIDADOR
+  // --------------------------------------------------------------------------
+  const rotinaCuidador = [];
+
+  if (isAbdominalPostOp) {
+    rotinaCuidador.push(
+      'Ensine a técnica de "levantar em bloco": primeiro ele(a) deve virar todo o corpo de lado na cama, colocar as duas pernas para fora e empurrar o colchão com os braços para sentar, sem dobrar a barriga.',
+      'Deixe uma luz suave ou abajur aceso à noite caso ele(a) precise ir ao banheiro com sono ou sob efeito de analgésicos, e fique atento se o curativo permanecer limpo e seco.'
+    );
+  } else if (isHipOrFemurPostOp) {
+    rotinaCuidador.push(
+      'Como ajudar a sentar e levantar do vaso e da cama: posicione o andador travado bem à frente dele(a), peça para ele(a) esticar a perna operada um pouquinho para frente antes de descer o corpo, e dê apoio segurando com firmeza pela cintura/cinto, NUNCA puxando pelos braços.',
+      'Mantenha as luzes 100% acesas em qualquer ida ao banheiro (mesmo no meio da noite) e confira diariamente se o chão do banheiro e da cozinha está completamente seco antes dele(a) pisar.'
+    );
+  } else if (hasCognitiveDecline) {
+    rotinaCuidador.push(
+      'Aguarde 2 minutos com o paciente sentado antes de levantar: ao acordar, sente-o na beira da cama com os pés apoiados no chão e converse calmamente para orientá-lo no espaço e evitar tontura repentina por pressão baixa.',
+      'Sempre conduza o paciente caminhando meio passo atrás e ao lado do lado mais fraco, com uma mão suave no quadril para suporte imediato sem puxar os braços.'
+    );
+  } else {
+    rotinaCuidador.push(
+      'Nunca levante o seu familiar da cama com pressa: ao acordar, sente-o na beira da cama por 1 a 2 minutos com os dois pés bem apoiados no chão. Isso evita tontura repentina e pressão baixa ao ficar de pé.',
+      'Seque o piso do banheiro antes e logo após o banho, calce sempre nele(a) sapatos com sola de borracha antiderrapante (nada de meias ou chinelos soltos) e segure sempre pelo quadril/cintura, nunca puxando pelos braços ou axilas.'
+    );
   }
 
-  if (hasLowVision || hasCognitiveDecline) {
-    adaptacoesPrioritarias.push({
-      titulo: 'Instale luz guia noturna com sensor e cole fita adesiva contrastante nos degraus',
-      detalhe: 'Coloque uma luzinha de tomada no corredor que acende sozinha com movimento e cole fita adesiva colorida (amarela ou preta) na beirada de degraus e soleiras para ele(a) enxergar onde pisa.'
-    });
-  }
-
-  const rotinaCuidador = [
-    'Nunca levante o seu familiar da cama com pressa: ao acordar, sente-o na beira da cama por 1 a 2 minutos com os dois pés bem apoiados no chão. Isso evita tontura repentina e pressão baixa ao ficar de pé.',
-    'Seque o piso do banheiro antes e logo após o banho, calce sempre nele(a) sapatos com sola de borracha antiderrapante (nada de meias ou chinelos soltos) e segure sempre pelo quadril/cintura, nunca puxando pelos braços ou axilas.'
-  ];
-
-  if (hasTubesOrWounds) {
+  if (hasTubesOrWounds && !isAbdominalPostOp) {
     rotinaCuidador.push(
       'Antes de movimentar o paciente da cama para a cadeira, verifique se a sonda, o dreno ou o curativo não estão repuxando ou presos na grade da cama.'
     );
   }
-
-  const resumoRisco = `Olá, família e cuidador! Ao cruzarmos a situação de saúde do seu familiar com as fotos da casa, identificamos que ${
-    hasPriorFalls || hasWheelchairOrBed || hasCognitiveDecline
-      ? 'ele(a) está em uma fase de alta fragilidade e risco elevado de queda nas primeiras 72 horas após a alta'
-      : 'ele(a) precisa de adaptações simples e imediatas no espaço para que a recuperação ocorra com conforto e segurança'
-  }. Os locais mais perigosos hoje são o banheiro (para sentar no vaso e tomar banho) e o caminho entre o quarto e o banheiro. Sigam as orientações práticas abaixo para proteger seu familiar e facilitar o cuidado no dia a dia.`;
 
   return {
     resumoRisco,
