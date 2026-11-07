@@ -32,19 +32,15 @@
           </svg>
         </div>
         <div>
-          <h1 class="brand-title">PROTOCOLO DE TRANSIÇÃO DOMICILIAR SEGURA</h1>
-          <div class="brand-subtitle">Adaptação do Ambiente Domiciliar e Prevenção de Quedas • Cuidadores e Familiares</div>
+          <h1 class="brand-title">PROTOCOLO DE TRANSIÇÃO DOMICILIAR SEGURA DO IDOSO</h1>
+          <div class="brand-subtitle">Adaptação do Lar &amp; Prevenção de Quedas nas Primeiras 72h • Pós-AVE, Fratura de Quadril e Declínio Cognitivo</div>
         </div>
       </div>
 
       <div class="header-actions">
-        <div class="timer-pill" title="Meta de completude da PoC: fluxo concluído em até 5 minutos">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
-          <span>Tempo: <strong id="elapsedTimer">00:00</strong> <small>(Meta &lt; 3 min)</small></span>
-        </div>
+        <button type="button" class="btn-api-config" id="resetFormBtn" style="padding: 0.45rem 0.85rem; font-weight: 700;">
+          🔄 Limpar / Novo Paciente
+        </button>
 
         <button type="button" class="btn-api-config" id="openApiModalBtn">
           <span class="api-status-dot" id="apiStatusDot"></span>
@@ -55,45 +51,6 @@
   </header>
 
   <main class="main-container">
-
-    <!-- Quick PoC Clinical Cases Bar -->
-    <section class="poc-cases-bar" aria-label="Casos Clínicos para Demonstração da PoC">
-      <div class="poc-cases-header">
-        <div class="poc-cases-title">
-          <span class="poc-badge">Casos de Demonstração</span>
-          <span>Casos Clínicos para Apresentação (Carregamento com 1 clique: Questionário + Fotos)</span>
-        </div>
-        <button type="button" class="btn-api-config" id="resetFormBtn" style="padding: 0.3rem 0.7rem; font-size: 0.76rem;">
-          Limpar / Novo Paciente
-        </button>
-      </div>
-
-      <div class="poc-cases-grid">
-        <button type="button" class="case-card-btn" data-case="caso1" id="btnCase1">
-          <div class="case-card-top">
-            <span class="case-name">📋 Caso 1: Jovem em Pós-Op Abdominal</span>
-            <span class="case-tag low">Risco Baixo</span>
-          </div>
-          <p class="case-desc">28 anos, pós-apendicectomia laparoscópica. Marcha independente, desconforto ao sentar/levantar, 4 fotos de teste.</p>
-        </button>
-
-        <button type="button" class="case-card-btn" data-case="caso2" id="btnCase2">
-          <div class="case-card-top">
-            <span class="case-name">📋 Caso 2: Idoso Pós-Op Fratura de Quadril</span>
-            <span class="case-tag high">Risco Alto</span>
-          </div>
-          <p class="case-desc">79 anos, osteossíntese de fêmur há 5 dias. Usa andador, baixa visão, queda recente, tapetes e degraus nas 4 fotos.</p>
-        </button>
-
-        <button type="button" class="case-card-btn" data-case="caso3" id="btnCase3">
-          <div class="case-card-top">
-            <span class="case-name">📋 Caso 3: Idoso Frágil + Declínio Cognitivo</span>
-            <span class="case-tag critical">Risco Crítico</span>
-          </div>
-          <p class="case-desc">84 anos, fragilidade, marcha assistida, confusão noturna (TCL), múltiplas quedas e uso de O₂ contínuo no chão.</p>
-        </button>
-      </div>
-    </section>
 
     <!-- 3-Step Navigation -->
     <nav class="stepper" aria-label="Etapas do Protocolo">
@@ -126,8 +83,8 @@
     <section id="step1Panel" class="panel-card">
       <div class="instruction-banner">
         <div>
-          <h2>ETAPA 1: TRIAGEM FUNCIONAL &amp; VULNERABILIDADE DO PACIENTE</h2>
-          <p><strong>Instruções de Preenchimento para a Família / Cuidador:</strong> Responda às questões com base na condição física e cognitiva <strong>atual</strong> do paciente no momento da alta ou transição. Essas respostas direcionarão a análise dos pontos de perigo nas fotos.</p>
+          <h2>ETAPA 1: TRIAGEM FUNCIONAL DO IDOSO &amp; VULNERABILIDADE DOMICILIAR</h2>
+          <p><strong>Orientações para a Família e Cuidador:</strong> Responda às questões com base na capacidade <strong>atual</strong> do idoso no momento da alta hospitalar ou transição do cuidado (pós-AVE, pós-operatório de quadril/fêmur, declínio cognitivo ou fragilidade). As respostas serão cruzadas com as fotos dos cômodos para apontar riscos invisíveis.</p>
         </div>
         <div class="vulnerability-pill" id="liveVulnerabilityBadge">
           <span>Grau de Dependência:</span>
@@ -135,14 +92,14 @@
         </div>
       </div>
 
-      <!-- Optional Anonymous Clinical Profile -->
+      <!-- Contexto Clínico do Idoso -->
       <div class="context-box">
-        <label for="clinicalContextInput">Contexto Clínico Breve (Opcional e Anônimo — ex.: Idade e motivo da internação/alta)</label>
+        <label for="clinicalContextInput">Contexto Clínico do Idoso (Opcional — ex.: Idade, diagnóstico recente e lado de fraqueza)</label>
         <input
           type="text"
           id="clinicalContextInput"
           class="context-input"
-          placeholder="Ex.: 79 anos, pós-operatório de fratura de fêmur há 5 dias, restrição de carga parcial..."
+          placeholder="Ex.: 82 anos, sequela de AVE com fraqueza do lado direito; ou 79 anos, pós-op de fratura de fêmur c/ andador; ou 84 anos com Alzheimer e desorientação noturna..."
         />
       </div>
 
@@ -211,8 +168,8 @@
             <li><strong>Pontos-chave:</strong> Soleira, presença de tapetes no chão e barras de apoio.</li>
           </ul>
           <div class="card-upload-action" id="uploadAction_banheiro">
+            <input type="file" id="fileBanheiro" accept="image/*" capture="environment" class="hidden" data-room="banheiro e box" multiple />
             <label class="card-upload-btn" for="fileBanheiro">
-              <input type="file" id="fileBanheiro" accept="image/*" capture="environment" class="hidden" data-room="banheiro e box" multiple />
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
                 <circle cx="12" cy="13" r="4"></circle>
@@ -251,8 +208,8 @@
             <li><strong>Pontos-chave:</strong> Fios no chão, tapetes soltos, mesas instáveis e largura de passagem.</li>
           </ul>
           <div class="card-upload-action" id="uploadAction_quarto">
+            <input type="file" id="fileQuarto" accept="image/*" capture="environment" class="hidden" data-room="caminho da cama ao banheiro" multiple />
             <label class="card-upload-btn" for="fileQuarto">
-              <input type="file" id="fileQuarto" accept="image/*" capture="environment" class="hidden" data-room="caminho da cama ao banheiro" multiple />
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
@@ -287,8 +244,8 @@
             <li><strong>Pontos-chave:</strong> Diferença de nível, piso escorregadio, iluminação e apoios.</li>
           </ul>
           <div class="card-upload-action" id="uploadAction_acesso">
+            <input type="file" id="fileAcesso" accept="image/*" capture="environment" class="hidden" data-room="acesso à casa" multiple />
             <label class="card-upload-btn" for="fileAcesso">
-              <input type="file" id="fileAcesso" accept="image/*" capture="environment" class="hidden" data-room="acesso à casa" multiple />
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -323,8 +280,8 @@
             <li><strong>Pontos-chave:</strong> Panos de prato no chão, passadeiras soltas, lixeiras obstruindo e botões de gás.</li>
           </ul>
           <div class="card-upload-action" id="uploadAction_cozinha">
+            <input type="file" id="fileCozinha" accept="image/*" capture="environment" class="hidden" data-room="cozinha" multiple />
             <label class="card-upload-btn" for="fileCozinha">
-              <input type="file" id="fileCozinha" accept="image/*" capture="environment" class="hidden" data-room="cozinha" multiple />
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                 <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
@@ -395,9 +352,13 @@
           </div>
         </div>
 
-        <div class="no-print" style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+        <div class="no-print" style="display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;">
+          <button type="button" class="btn btn-audio" id="audioChecklistBtn">
+            <span id="audioIcon">🔊</span>
+            <span id="audioBtnText">Ouvir Checklist em Áudio</span>
+          </button>
           <button type="button" class="btn btn-secondary" id="printReportBtn" style="background: rgba(255,255,255,0.15); color: #fff; border-color: rgba(255,255,255,0.35);">
-            🖨️ Imprimir / Salvar PDF para a Família
+            🖨️ Imprimir / Salvar PDF
           </button>
         </div>
       </div>

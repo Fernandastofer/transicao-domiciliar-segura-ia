@@ -182,117 +182,6 @@ body {
   padding: 1.5rem;
 }
 
-/* PoC Quick Cases Bar */
-.poc-cases-bar {
-  background: linear-gradient(135deg, #ffffff 0%, #f0f9fa 100%);
-  border: 1px solid #bae6fd;
-  border-radius: var(--radius-md);
-  padding: 1rem 1.25rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.poc-cases-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
-}
-
-.poc-cases-title {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-}
-
-.poc-badge {
-  background: var(--primary);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.15rem 0.55rem;
-  border-radius: 4px;
-  text-transform: uppercase;
-}
-
-.poc-cases-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 0.75rem;
-}
-
-.case-card-btn {
-  text-align: left;
-  background: var(--bg-surface);
-  border: 1.5px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem 0.95rem;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  position: relative;
-}
-
-.case-card-btn:hover {
-  border-color: var(--primary);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-}
-
-.case-card-btn.active {
-  border-color: var(--primary);
-  background: var(--primary-light);
-  box-shadow: 0 0 0 2px rgba(15, 92, 110, 0.15);
-}
-
-.case-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.case-tag {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 0.12rem 0.45rem;
-  border-radius: 4px;
-}
-
-.case-tag.low {
-  background: var(--success-light);
-  color: var(--success);
-}
-
-.case-tag.high {
-  background: var(--warning-light);
-  color: #b45309;
-}
-
-.case-tag.critical {
-  background: var(--danger-light);
-  color: var(--danger);
-}
-
-.case-name {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--text-main);
-}
-
-.case-desc {
-  font-size: 0.77rem;
-  color: var(--text-secondary);
-}
-
 /* Stepper Navigation */
 .stepper {
   display: grid;
@@ -1233,6 +1122,122 @@ body {
   color: var(--text-muted);
 }
 
+.btn-audio {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  background: #ffffff;
+  color: var(--primary-dark);
+  border: 1.5px solid #ffffff;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.btn-audio:hover {
+  background: var(--bg-surface);
+  transform: translateY(-1px);
+}
+
+.btn-audio.playing {
+  background: #fee2e2;
+  color: var(--danger);
+  border-color: #fca5a5;
+  animation: pulseAudio 1.5s infinite;
+}
+
+@keyframes pulseAudio {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* Robust Caregiver Grid */
+.report-section.caregiver-robust {
+  border-left: 5px solid #0284c7;
+  background: #f0f9ff;
+}
+
+.care-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.care-topic-card {
+  background: #ffffff;
+  border: 1px solid #bae6fd;
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.care-topic-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  color: #0369a1;
+  font-size: 0.92rem;
+  border-bottom: 1px dashed #e0f2fe;
+  padding-bottom: 0.45rem;
+}
+
+.care-topic-bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.45;
+}
+
+.care-topic-bullets li {
+  position: relative;
+  padding-left: 1.15rem;
+}
+
+.care-topic-bullets li::before {
+  content: "•";
+  position: absolute;
+  left: 0.25rem;
+  color: #0284c7;
+  font-weight: bold;
+}
+
+/* Alarm Signs Section */
+.report-section.alarm-signs {
+  border-left: 5px solid var(--danger);
+  background: #fef2f2;
+}
+
+.alarm-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.alarm-item {
+  background: #ffffff;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.86rem;
+  color: #991b1b;
+  line-height: 1.45;
+}
+
 .clinical-disclaimer {
   background: #fffbeb;
   border: 1px solid #fde68a;
@@ -1305,7 +1310,6 @@ body {
 @media print {
   .lgpd-strip,
   .app-header,
-  .poc-cases-bar,
   .stepper,
   .step-footer,
   .no-print {
